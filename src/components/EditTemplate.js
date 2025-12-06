@@ -1033,7 +1033,6 @@ const EditTemplate = () => {
             padding: "clamp(16px, 3vw, 32px)",
             background: "#616569ff",
             minHeight: "100vh",
-            
           }}
         >
           {/* <div
@@ -1102,7 +1101,7 @@ const EditTemplate = () => {
               <div
                 style={{
                   background: "var(--bg-tertiary)",
-                  padding: "14px 16px",
+                  padding: "14(max-width: 520px)px 16px",
                   borderRadius: 8,
                   marginBottom: 12,
                 }}
@@ -1113,8 +1112,9 @@ const EditTemplate = () => {
                     fontSize: "clamp(20px, 3vw, 16px)",
                     fontWeight: 600,
                     color: "#333",
+                    padding: "14px 10px"
                   }}
-                >
+                > 
                   Edit Resume
                 </h4>
               </div>

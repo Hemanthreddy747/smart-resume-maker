@@ -62,6 +62,7 @@
     right: auto;
     transform: translateX(-50%);
     bottom: 12px;
+    display: none;
   }
 
   .lp-developer-link {
