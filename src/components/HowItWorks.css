@@ -1,0 +1,137 @@
+.how-section {
+  padding: 20px;
+  background: linear-gradient(180deg, #f6fbff 0%, #f3f7fb 40%, #ffffff 100%);
+}
+
+.how-inner {
+  max-width: 1100px;
+  margin: 0 auto;
+  background: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 0.6),
+    rgba(255, 255, 255, 0.55)
+  );
+  padding: 28px;
+  border-radius: 14px;
+  box-shadow: 0 8px 30px rgba(9, 30, 66, 0.06);
+}
+
+.how-header {
+  text-align: center;
+  margin-bottom: 18px;
+}
+
+.section-title {
+  font-size: clamp(20px, 3.2vw, 30px);
+  font-weight: 800;
+  color: var(--text-primary, #07204a);
+  margin: 6px 0 6px;
+}
+
+.section-lead {
+  color: var(--muted, #4b5b6b);
+  font-size: 14px;
+  margin: 0 auto;
+  max-width: 720px;
+}
+
+.how-steps {
+  list-style: none;
+  padding: 0;
+  margin: 20px 0 0;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 18px;
+}
+
+.how-step {
+  display: flex;
+  gap: 14px;
+  align-items: flex-start;
+  background: linear-gradient(180deg, #ffffff, #fbfdff);
+  border: 1px solid rgba(11, 95, 255, 0.06);
+  padding: 18px;
+  border-radius: 12px;
+  transition: transform 220ms ease, box-shadow 220ms ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.how-step:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 16px 40px rgba(9, 30, 66, 0.12);
+}
+
+.step-media {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  min-width: 56px;
+}
+
+.step-num {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #3b82f6 0%, #0b5fff 100%);
+  color: #fff;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 800;
+  box-shadow: 0 6px 18px rgba(11, 95, 255, 0.14);
+}
+
+.step-icon svg {
+  width: 28px;
+  height: 28px;
+  color: #0b3b6b;
+}
+
+.step-body {
+  flex: 1 1 auto;
+}
+
+.step-title {
+  margin: 0 0 6px 0;
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--text-primary, #07204a);
+}
+
+.step-desc {
+  margin: 0;
+  color: var(--muted, #556677);
+  font-size: 14px;
+  line-height: 1.45;
+}
+
+@media (max-width: 1100px) {
+  .how-steps {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 700px) {
+  .how-inner {
+    padding: 18px;
+  }
+  .how-steps {
+    grid-template-columns: 1fr;
+  }
+  .step-media {
+    flex-direction: row;
+    align-items: center;
+    min-width: 48px;
+  }
+  .step-num {
+    width: 40px;
+    height: 40px;
+    font-size: 14px;
+  }
+  .step-icon svg {
+    width: 22px;
+    height: 22px;
+  }
+}

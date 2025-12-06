@@ -1,0 +1,127 @@
+/* Template 1 - Classic Professional */
+.template-1 {
+  --template-primary: #2b6cb0;
+  --template-secondary: #3182ce;
+  --template-accent-bg: #ebf4ff;
+  --template-accent-text: #1a365d;
+  --template-font: "Inter", Arial, sans-serif;
+}
+
+/* Template 2 - Modern Executive */
+.template-2 {
+  --template-primary: #1a202c;
+  --template-secondary: #2d3748;
+  --template-accent-bg: #2d3748;
+  --template-accent-text: #ffffff;
+  --template-font: "Georgia", serif;
+}
+
+/* Additional template styles for future templates */
+.template-3 {
+  --template-primary: #059669;
+  --template-secondary: #10b981;
+  --template-accent-bg: #d1fae5;
+  --template-accent-text: #064e3b;
+  --template-font: "Arial", sans-serif;
+}
+
+.template-4 {
+  --template-primary: #7c3aed;
+  --template-secondary: #8b5cf6;
+  --template-accent-bg: #ede9fe;
+  --template-accent-text: #5b21b6;
+  --template-font: "Helvetica", sans-serif;
+}
+
+.template-5 {
+  --template-primary: #dc2626;
+  --template-secondary: #ef4444;
+  --template-accent-bg: #fee2e2;
+  --template-accent-text: #991b1b;
+  --template-font: "Verdana", sans-serif;
+}
+
+.template-6 {
+  --template-primary: #ea580c;
+  --template-secondary: #f97316;
+  --template-accent-bg: #ffedd5;
+  --template-accent-text: #9a3412;
+  --template-font: "Times New Roman", serif;
+}
+
+.template-7 {
+  --template-primary: #0891b2;
+  --template-secondary: #06b6d4;
+  --template-accent-bg: #cffafe;
+  --template-accent-text: #164e63;
+  --template-font: "Courier New", monospace;
+}
+
+.template-8 {
+  --template-primary: #4f46e5;
+  --template-secondary: #6366f1;
+  --template-accent-bg: #e0e7ff;
+  --template-accent-text: #312e81;
+  --template-font: "Trebuchet MS", sans-serif;
+}
+
+.template-9 {
+  --template-primary: #be185d;
+  --template-secondary: #db2777;
+  --template-accent-bg: #fce7f3;
+  --template-accent-text: #831843;
+  --template-font: "Palatino", serif;
+}
+
+/* Print styles for PDF generation */
+@media print {
+  @page {
+    margin: 20mm 15mm;
+    size: A4;
+  }
+
+  body {
+    margin: 0;
+    padding: 0;
+  }
+
+  /* Prevent page breaks inside sections */
+  section,
+  div[style*="marginBottom"] {
+    page-break-inside: avoid;
+    break-inside: avoid;
+  }
+
+  /* Prevent orphaned headers */
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    page-break-after: avoid;
+    break-after: avoid;
+    page-break-inside: avoid;
+    break-inside: avoid;
+  }
+
+  /* Keep experience items together */
+  .experience-item,
+  .education-item,
+  .project-item {
+    page-break-inside: avoid;
+    break-inside: avoid;
+  }
+
+  /* Keep lists together when possible */
+  ul,
+  ol {
+    page-break-inside: avoid;
+    break-inside: avoid;
+  }
+
+  /* Ensure consistent margins on all pages */
+  * {
+    box-sizing: border-box;
+  }
+}

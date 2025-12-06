@@ -1,0 +1,324 @@
+/* Minimal & Stylish Template Section */
+
+.templates-section {
+  /* padding: 80px 24px; */
+  background: linear-gradient(180deg, #f8f9fa 0%, #ffffff 100%);
+  min-height: 100vh;
+}
+
+.templates-container {
+  max-width: 1280px;
+  margin: 0 auto;
+}
+
+.templates-header {
+  text-align: center;
+  margin-bottom: 56px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+}
+
+.header-content {
+  max-width: 600px;
+}
+
+.section-title {
+  font-size: 42px;
+  font-weight: 700;
+  color: #1a1a1a;
+  margin: 0 0 12px 0;
+  letter-spacing: -0.02em;
+}
+
+.section-subtitle {
+  font-size: 18px;
+  color: #64748b;
+  margin: 0;
+  font-weight: 400;
+}
+
+.selection-indicator {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 16px;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  border-radius: 24px;
+  font-size: 14px;
+  font-weight: 600;
+  box-shadow: 0 4px 12px rgba(102, 126, 234, 0.25);
+}
+
+.selection-indicator svg {
+  width: 16px;
+  height: 16px;
+}
+
+/* Grid Layout */
+.templates-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 32px;
+  margin: 0 auto;
+}
+
+/* Template Card */
+.template-card {
+  position: relative;
+  background: white;
+  border: 2px solid #e2e8f0;
+  border-radius: 16px;
+  overflow: hidden;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  padding: 0;
+  display: block;
+  width: 100%;
+}
+
+.template-card:hover {
+  transform: translateY(-8px);
+  border-color: #667eea;
+  box-shadow: 0 20px 40px rgba(102, 126, 234, 0.15);
+}
+
+.template-card:focus {
+  outline: 3px solid rgba(102, 126, 234, 0.3);
+  outline-offset: 2px;
+}
+
+.template-card.selected {
+  border-color: #667eea;
+  box-shadow: 0 12px 32px rgba(102, 126, 234, 0.2);
+}
+
+.card-inner {
+  position: relative;
+}
+
+/* Template Image */
+.template-image {
+  position: relative;
+  aspect-ratio: 210 / 297;
+  overflow: hidden;
+  background: #f8f9fa;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+}
+
+.template-image img,
+.template-preview {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  object-position: top center;
+  display: block;
+  transition: transform 0.3s ease;
+  max-width: 100%;
+  max-height: 100%;
+}
+
+.template-card:hover .template-image img,
+.template-card:hover .template-preview {
+  transform: scale(1.02);
+}
+
+.image-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, transparent 0%, rgba(0, 0, 0, 0.02) 100%);
+  pointer-events: none;
+}
+
+/* Card Content */
+.card-content {
+  padding: 20px;
+  background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+}
+
+.template-name {
+  font-size: 18px;
+  font-weight: 600;
+  color: #1a1a1a;
+  margin: 0 0 6px 0;
+  letter-spacing: -0.01em;
+}
+
+.template-desc {
+  font-size: 14px;
+  color: #64748b;
+  margin: 0;
+  line-height: 1.5;
+}
+
+/* Check Badge */
+.check-badge {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  width: 36px;
+  height: 36px;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4);
+  animation: checkPulse 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+@keyframes checkPulse {
+  0% {
+    transform: scale(0);
+  }
+  50% {
+    transform: scale(1.1);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+/* Loading & Error States */
+.loading-message {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  padding: 24px;
+  margin-top: 32px;
+  background: white;
+  border-radius: 12px;
+  color: #64748b;
+  font-size: 15px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+}
+
+.spinner {
+  width: 20px;
+  height: 20px;
+  border: 2px solid #e2e8f0;
+  border-top-color: #667eea;
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.error-message {
+  text-align: center;
+  padding: 20px;
+  margin-top: 32px;
+  background: #fef2f2;
+  color: #dc2626;
+  border-radius: 12px;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .templates-section {
+    /* padding: 48px 16px; */
+  }
+
+  .section-title {
+    font-size: 32px;
+  }
+
+  .section-subtitle {
+    font-size: 16px;
+  }
+
+  .templates-header {
+    margin-bottom: 40px;
+  }
+
+  .templates-grid {
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+    gap: 24px;
+  }
+
+  .template-card {
+    border-radius: 12px;
+  }
+
+  .card-content {
+    padding: 16px;
+  }
+
+  .template-name {
+    font-size: 16px;
+  }
+
+  .template-desc {
+    font-size: 13px;
+  }
+}
+
+@media (max-width: 480px) {
+  .templates-grid {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+
+  .section-title {
+    font-size: 28px;
+  }
+}
+
+.template-actions {
+  display: flex;
+  gap: var(--spacing-sm);
+}
+
+.template-actions button {
+  background: rgba(255, 255, 255, 0.12);
+  border: none;
+  color: var(--text-inverse);
+  padding: var(--spacing-sm);
+  border-radius: var(--spacing-sm);
+  font-size: var(--text-xs);
+  cursor: pointer;
+}
+
+/* Hide native scrollbars where possible */
+.template-item .template-preview,
+.template-item img {
+  -ms-overflow-style: none; /* IE/Edge */
+  scrollbar-width: none; /* Firefox */
+}
+.template-item .template-preview::-webkit-scrollbar {
+  display: none; /* WebKit */
+}
+
+@media (max-width: 980px) {
+  .templates-grid {
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: var(--spacing-md);
+    padding: var(--spacing-sm);
+  }
+}
+
+@media (max-width: 520px) {
+  .templates-grid {
+    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+    gap: var(--spacing-sm);
+  }
+  .template-item {
+    border-radius: var(--radius-md);
+    aspect-ratio: 210 / 297;
+    max-height: 360px;
+  }
+  .template-footer {
+    padding: var(--spacing-sm);
+  }
+}

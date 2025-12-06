@@ -1,0 +1,75 @@
+/* Simplified badge-style DeveloperCredit positioned bottom-right */
+.lp-developer-credit {
+  position: fixed;
+  right: 16px;
+  bottom: 16px;
+  z-index: 9999;
+  pointer-events: auto;
+}
+
+.lp-developer-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 10px;
+  border-radius: 999px;
+  text-decoration: none;
+  background: rgba(255, 255, 255, 0.9);
+  color: var(--text-primary, #0b1220);
+  box-shadow: 0 6px 18px rgba(12, 20, 30, 0.08);
+  border: 1px solid rgba(10, 10, 10, 0.04);
+  transition: transform 0.14s ease, box-shadow 0.14s ease;
+  backdrop-filter: blur(4px);
+}
+
+.lp-developer-link:focus,
+.lp-developer-link:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 10px 26px rgba(12, 20, 30, 0.12);
+}
+
+.lp-developer-avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  object-fit: cover;
+  flex-shrink: 0;
+  border: 1px solid rgba(10, 10, 10, 0.06);
+}
+
+.lp-developer-meta {
+  display: flex;
+  flex-direction: column;
+  line-height: 1;
+}
+
+.lp-developer-name {
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--text-primary, #0b1220);
+}
+
+.lp-developer-role {
+  font-size: 11px;
+  color: var(--text-secondary, #6b7280);
+  margin-top: 2px;
+}
+
+/* On very small screens keep it centered at the bottom and unobtrusive */
+@media (max-width: 520px) {
+  .lp-developer-credit {
+    left: 50%;
+    right: auto;
+    transform: translateX(-50%);
+    bottom: 12px;
+  }
+
+  .lp-developer-link {
+    padding: 8px 12px;
+  }
+
+  .lp-developer-avatar {
+    width: 36px;
+    height: 36px;
+  }
+}

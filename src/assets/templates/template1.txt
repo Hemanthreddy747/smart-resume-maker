@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Compact Two-Page Resume</title>
+
+    <style>
+        body {
+            font-family: "Inter", Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background: #e4e7eb;
+        }
+
+        .hx_page {
+            width: 820px;
+            margin-inline:  auto;
+            background: #fff;
+            padding: 30px 40px;
+            box-shadow: 0 0 12px rgba(0,0,0,0.12);
+            page-break-after: always;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 25px;
+        }
+
+        header h1 {
+            font-size: 34px;
+            margin: 0;
+            font-weight: 800;
+        }
+
+        .hx_role {
+            font-size: 16px;
+            margin-top: 4px;
+            font-weight: 600;
+        }
+
+        .hx_contact {
+            font-size: 13px;
+            margin-top: 8px;
+        }
+
+        .hx_contact span {
+            margin: 0 6px;
+        }
+
+        .hx_section {
+            margin-bottom: 20px;
+        }
+
+        .hx_section h2 {
+            border-bottom: 2px solid #2b6cb0;
+            padding-bottom: 4px;
+            margin-bottom: 10px;
+            font-size: 19px;
+            font-weight: 700;
+            color: #2b6cb0;
+        }
+
+        .hx_skills_grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 8px;
+        }
+
+        .hx_skills_grid span {
+            background: #edf2f7;
+            padding: 6px 10px;
+            border-radius: 4px;
+            font-size: 13px;
+            font-weight: 500;
+        }
+
+        .hx_item {
+            margin-bottom: 15px;
+        }
+
+        .hx_item_header {
+            display: flex;
+            justify-content: space-between;
+            font-size: 15px;
+            font-weight: 700;
+        }
+
+        .hx_item ul {
+            padding-left: 18px;
+            margin-top: 5px;
+        }
+
+        .hx_item ul li {
+            margin-bottom: 5px;
+            font-size: 13px;
+        }
+
+        p {
+            font-size: 14px;
+            line-height: 1.35;
+        }
+    </style>
+</head>
+
+<body>
+
+<!-- PAGE 1 -->
+<div class="hx_page">
+
+    <header>
+        <h1>Jonathan Reed</h1>
+        <div class="hx_role">Senior Software Engineer</div>
+
+        <div class="hx_contact">
+            <span>Email: jonathan.reed@example.com</span>
+            <span>|</span>
+            <span>Phone: +1 555-123-4567</span>
+            <span>|</span>
+            <span>Website: jonathanreed.dev</span>
+        </div>
+    </header>
+
+    <!-- SUMMARY -->
+    <section class="hx_section">
+        <h2>Professional Summary</h2>
+        <p>
+            Senior Software Engineer with 8+ years of expertise in scalable system design, 
+            backend engineering, distributed systems, and enterprise architecture. Proven 
+            success in optimizing platforms, reducing cloud costs, building microservices, 
+            mentoring teams, and delivering high-impact solutions for B2B SaaS, analytics, 
+            cloud automation, and security technology companies.
+        </p>
+    </section>
+
+    <!-- SKILLS -->
+    <section class="hx_section">
+        <h2>Skills</h2>
+
+        <div class="hx_skills_grid">
+            <span>JavaScript / TypeScript</span>
+            <span>React / Next.js</span>
+            <span>Node.js / Express</span>
+            <span>Java / Spring Boot</span>
+            <span>GraphQL / REST</span>
+            <span>Microservices</span>
+            <span>Docker / Kubernetes </span>
+            <span>AWS / GCP / Firebase</span>
+            <span>SQL / PostgreSQL</span>
+            <span>MongoDB / Redis</span>
+            <span>CI/CD · GitHub Actions</span>
+            <span>System Design</span>
+        </div>
+    </section>
+
+    <!-- EXPERIENCE -->
+    <section class="hx_section">
+        <h2>Experience</h2>
+
+        <div class="hx_item">
+            <div class="hx_item_header">
+                <span>Lead Software Engineer – NovaTech Labs</span>
+                <span>2021 – Present</span>
+            </div>
+            <ul>
+                <li>Designed & developed a real-time customer analytics system processing 2M+ events/day.</li>
+                <li>Reduced infrastructure costs by 28% through optimized microservice orchestration.</li>
+                <li>Implemented event-driven architecture using Kafka, improving reliability by 40%.</li>
+                <li>Led 6 engineers; established coding standards, review process & mentoring culture.</li>
+                <li>Built internal developer platform reducing deployment time from 35 mins to 3 mins.</li>
+            </ul>
+        </div>
+
+        <div class="hx_item">
+            <div class="hx_item_header">
+                <span>Software Engineer – Cygnus Systems</span>
+                <span>2018 – 2021</span>
+            </div>
+            <ul>
+                <li>Built enterprise React dashboards used by 14+ Fortune 500 clients.</li>
+                <li>Developed GraphQL services improving data retrieval performance by 60%.</li>
+                <li>Implemented robust role-based access system covering 45+ permission types.</li>
+                <li>Improved CI/CD pipelines reducing deployment errors by 70%.</li>
+            </ul>
+        </div>
+
+        <div class="hx_item">
+            <div class="hx_item_header">
+                <span>Junior Developer – Orion Softworks</span>
+                <span>2016 – 2018</span>
+            </div>
+            <ul>
+                <li>Developed internal tools saving ~300 developer hours per quarter.</li>
+                <li>Enhanced SQL queries improving reporting performance 4×.</li>
+                <li>Built monitoring dashboards for system health tracking.</li>
+            </ul>
+        </div>
+
+    </section>
+
+</div>
+
+<!-- PAGE 2 -->
+<div class="hx_page">
+
+    <!-- PROJECTS -->
+    <section class="hx_section">
+        <h2>Projects</h2>
+
+        <div class="hx_item">
+            <div class="hx_item_header">
+                <span>AI-Driven Automation Platform</span>
+                <span>2023</span>
+            </div>
+            <ul>
+                <li>Created task engine using ML models reducing manual operations by 55%.</li>
+                <li>Integrated GPT-based recommendation engine improving workflow accuracy.</li>
+                <li>Deployed scalable pipeline on AWS Lambda with event-driven triggers.</li>
+            </ul>
+        </div>
+
+        <div class="hx_item">
+            <div class="hx_item_header">
+                <span>Cloud File Sync System</span>
+                <span>2022</span>
+            </div>
+            <ul>
+                <li>Built WebSocket-powered sync engine for real-time file updates.</li>
+                <li>Implemented zero-downtime blue-green deployment strategy.</li>
+                <li>Optimized storage usage, reducing overall cloud bills by 22%.</li>
+            </ul>
+        </div>
+
+        <div class="hx_item">
+            <div class="hx_item_header">
+                <span>IoT Sensor Platform</span>
+                <span>2021</span>
+            </div>
+            <ul>
+                <li>Designed MQTT-based ingestion pipeline handling 700k messages/hour.</li>
+                <li>Built device management dashboard with real-time metrics.</li>
+            </ul>
+        </div>
+
+    </section>
+
+    <!-- EDUCATION -->
+    <section class="hx_section">
+        <h2>Education</h2>
+
+        <div class="hx_item">
+            <div class="hx_item_header">
+                <span>Bachelor of Technology – Computer Science</span>
+                <span>2012 – 2016</span>
+            </div>
+            <p>University of Techville · GPA: 8.6/10</p>
+        </div>
+    </section>
+
+    <!-- CERTIFICATIONS -->
+    <section class="hx_section">
+        <h2>Certifications</h2>
+        <ul>
+            <li>AWS Certified Solutions Architect – Associate</li>
+            <li>Google Professional Cloud Developer</li>
+            <li>Oracle Certified Java Programmer</li>
+            <li>Kubernetes & Cloud Native Associate (KCNA)</li>
+        </ul>
+    </section>
+
+    <!-- ACHIEVEMENTS -->
+    <section class="hx_section">
+        <h2>Achievements</h2>
+        <ul>
+            <li>Winner – Global HackFest 2022 (AI Automation Track)</li>
+            <li>Top 1% performer in annual engineering review (three consecutive years)</li>
+            <li>Recognized for building in-house deployment simulator used by 40+ engineers</li>
+        </ul>
+    </section>
+
+    <!-- LANGUAGES -->
+    <section class="hx_section">
+        <h2>Languages</h2>
+        <ul>
+            <li>English – Fluent</li>
+            <li>German – Intermediate</li>
+            <li>Spanish – Basic</li>
+        </ul>
+    </section>
+
+</div>
+
+</body>
+</html>

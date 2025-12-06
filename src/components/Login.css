@@ -1,0 +1,193 @@
+.login-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-sizing: border-box;
+}
+
+.login-card {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  backdrop-filter: blur(10px);
+  padding: var(--spacing-xl) var(--spacing-lg);
+  border-radius: var(--radius-xl);
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  box-shadow: var(--shadow-2xl);
+  width: 100%;
+  max-width: 420px;
+  min-width: 360px;
+  color: var(--text-inverse);
+  margin: 0 auto;
+}
+
+.brand-section {
+  text-align: center;
+  margin-bottom: var(--spacing-lg);
+}
+
+.brand-section h1 {
+  font-size: var(--text-5xl);
+  font-weight: var(--font-bold);
+  margin-bottom: var(--spacing-sm);
+  background: linear-gradient(45deg, #fff, #f0f0f0);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.brand-section p {
+  opacity: 0.8;
+  font-size: var(--text-lg);
+}
+
+.auth-form {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-md);
+}
+
+.auth-form h2 {
+  text-align: center;
+  margin-bottom: var(--spacing-md);
+  font-size: var(--text-3xl);
+  font-weight: var(--font-semibold);
+}
+
+.form-group {
+  position: relative;
+}
+
+.form-group input {
+  width: 100%;
+  padding: var(--spacing-md);
+  border: 1px solid rgba(255, 255, 255, 0.28);
+  border-radius: var(--radius-lg);
+  background: rgba(255, 255, 255, 0.08);
+  color: var(--text-inverse);
+  font-size: var(--text-base);
+  transition: all var(--transition-fast);
+  box-sizing: border-box;
+}
+
+.form-group input::placeholder {
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.form-group input:focus {
+  outline: none;
+  border-color: rgba(255, 255, 255, 0.5);
+  background: rgba(255, 255, 255, 0.15);
+  transform: translateY(-2px);
+}
+
+.auth-button {
+  background: linear-gradient(45deg, #667eea, #764ba2);
+  color: var(--text-inverse);
+  border: none;
+  padding: var(--spacing-md);
+  border-radius: var(--radius-lg);
+  font-size: var(--text-lg);
+  font-weight: var(--font-semibold);
+  cursor: pointer;
+  transition: all var(--transition-fast);
+  margin-top: var(--spacing-sm);
+}
+
+.auth-button:hover:not(:disabled) {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-lg);
+}
+
+.auth-button:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+}
+
+.google-button {
+  background: rgba(255, 255, 255, 0.95);
+  color: var(--text-primary);
+  border: none;
+  padding: var(--spacing-md);
+  border-radius: var(--radius-lg);
+  font-size: var(--text-base);
+  font-weight: var(--font-semibold);
+  cursor: pointer;
+  transition: all var(--transition-fast);
+  margin-top: var(--spacing-sm);
+}
+
+.google-button:hover:not(:disabled) {
+  background: var(--bg-primary);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-lg);
+}
+
+.google-button:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+}
+
+.auth-switch {
+  text-align: center;
+  margin-top: var(--spacing-md);
+  color: rgba(255, 255, 255, 0.8);
+}
+
+.auth-link {
+  color: var(--text-inverse);
+  text-decoration: underline;
+  cursor: pointer;
+  font-weight: var(--font-semibold);
+  transition: all var(--transition-slow);
+}
+
+.auth-link:hover {
+  color: #f0f0f0;
+  text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+}
+
+/* Toast container adjustments */
+.Toastify__toast-container {
+  z-index: 9999;
+}
+
+.Toastify__toast {
+  border-radius: var(--radius-lg);
+  backdrop-filter: blur(10px);
+}
+
+@media (max-width: 768px) {
+  .login-card {
+    padding: var(--spacing-lg) var(--spacing-md);
+    margin: 0 auto;
+  }
+
+  .brand-section h1 {
+    font-size: var(--text-3xl);
+  }
+
+  .brand-section p {
+    font-size: var(--text-base);
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.login-card {
+  animation: fadeIn 0.6s ease-out;
+}
+
+.login-modal .modal-content {
+  background: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+  backdrop-filter: none !important;
+}
