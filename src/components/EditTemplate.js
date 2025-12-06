@@ -1031,11 +1031,12 @@ const EditTemplate = () => {
         <div
           style={{
             padding: "clamp(16px, 3vw, 32px)",
-            background: "#f5f7fa",
+            background: "#616569ff",
             minHeight: "100vh",
+            
           }}
         >
-          <div
+          {/* <div
             style={{
               display: "flex",
               flexDirection: window.innerWidth <= 768 ? "column" : "row",
@@ -1080,7 +1081,7 @@ const EditTemplate = () => {
             >
               ← Back to Templates
             </button>
-          </div>
+          </div> */}
 
           <div
             style={{
@@ -1101,7 +1102,7 @@ const EditTemplate = () => {
               <div
                 style={{
                   background: "var(--bg-tertiary)",
-                  padding: "12px 16px",
+                  padding: "14px 16px",
                   borderRadius: 8,
                   marginBottom: 12,
                 }}
@@ -1273,6 +1274,7 @@ const EditTemplate = () => {
                         ? "scale(0.9)"
                         : "scale(0.85)",
                     transformOrigin: "top center",
+                    marginTop: "5px",
                   }}
                 >
                   <div ref={printRef}>
