@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect } from "react";
-import { useSearchParams } from "react-router-dom";
+import { useSearchParams, useNavigate } from "react-router-dom";
 import dummyTemplates from "./dummyTemplates";
 import "./TemplateStyles.css";
 import SavedResumesModal from "./SavedResumesModal";
@@ -95,9 +95,13 @@ function ResumeView({
   const templateStyles = getTemplateStyles();
 
   const containerStyle = {
-    border: editable ? "none" : "1px solid var(--border-light)",
+    border: "none",
     borderRadius: 0,
-    padding: editable ? "clamp(16px, 3vw, 30px)" : "clamp(20px, 4vw, 40px)",
+    padding: editable
+      ? "clamp(16px, 3vw, 30px)"
+      : forPrint
+      ? "40px"
+      : "clamp(20px, 4vw, 40px)",
     background: "var(--bg-primary)",
     width: isPreview
       ? "100%"
@@ -110,7 +114,7 @@ function ResumeView({
     margin: "0 auto",
     fontFamily: templateStyles.fontFamily,
     lineHeight: 1.35,
-    boxShadow: editable ? "none" : "var(--shadow-md)",
+    boxShadow: editable ? "none" : forPrint ? "none" : "var(--shadow-md)",
     boxSizing: "border-box",
   };
 
@@ -120,14 +124,18 @@ function ResumeView({
   };
 
   const nameStyle = {
-    fontSize: editable ? "clamp(24px, 5vw, 30px)" : "clamp(28px, 5vw, 34px)",
+    fontSize: editable
+      ? "clamp(24px, 5vw, 30px)"
+      : forPrint
+      ? "34px"
+      : "clamp(28px, 5vw, 34px)",
     fontWeight: 800,
     color: templateStyles.nameColor,
     margin: 0,
   };
 
   const titleStyle = {
-    fontSize: "clamp(14px, 3vw, 16px)",
+    fontSize: forPrint ? "16px" : "clamp(14px, 3vw, 16px)",
     fontWeight: 600,
     margin: 0,
     marginTop: 4,
@@ -153,7 +161,7 @@ function ResumeView({
   };
 
   const sectionTitleStyle = {
-    fontSize: "clamp(16px, 3.5vw, 19px)",
+    fontSize: forPrint ? "19px" : "clamp(16px, 3.5vw, 19px)",
     fontWeight: 700,
     color: templateStyles.primaryColor,
     marginTop: 20,
@@ -799,11 +807,19 @@ const EditTemplate = () => {
   const printRef = useRef(null);
   const [searchParams, setSearchParams] = useSearchParams();
   const [isSavedModalOpen, setSavedModalOpen] = useState(false);
+  const [pdfPreviewUrl, setPdfPreviewUrl] = useState(null);
+  const [pdfImageUrls, setPdfImageUrls] = useState([]);
+  const [isGeneratingPdf, setIsGeneratingPdf] = useState(false);
+  const navigate = useNavigate();
 
   // Auto-select template when arriving via /edit-template?template=<id>
   useEffect(() => {
     const t = searchParams.get("template");
-    if (!t) return;
+    if (!t) {
+      setSelected(null);
+      setResume(null);
+      return;
+    }
     const id = parseInt(t, 10);
     if (isNaN(id)) return;
     const found = dummyTemplates.find((d) => d.id === id);
@@ -812,6 +828,116 @@ const EditTemplate = () => {
       setResume({ ...found.content });
     }
   }, [searchParams]);
+
+  // Generate PDF preview whenever resume changes
+  useEffect(() => {
+    if (!resume || !printRef.current) return;
+
+    const generatePdfPreview = async () => {
+      setIsGeneratingPdf(true);
+      const startTime = Date.now();
+
+      try {
+        const html2pdf = (await import("html2pdf.js")).default;
+        const element = printRef.current;
+
+        const opt = {
+          margin: 0,
+          filename: "preview.pdf",
+          image: { type: "jpeg", quality: 1 },
+          html2canvas: { scale: 2, useCORS: true, windowWidth: 794 },
+          jsPDF: { unit: "mm", format: "a4", orientation: "portrait" },
+          pagebreak: { mode: ["avoid-all", "css", "legacy"] },
+        };
+
+        const pdfBlob = await html2pdf().set(opt).from(element).output("blob");
+
+        const pdfBlobUrl = URL.createObjectURL(pdfBlob);
+
+        setPdfPreviewUrl((prevUrl) => {
+          if (prevUrl) {
+            URL.revokeObjectURL(prevUrl);
+          }
+          return pdfBlobUrl;
+        });
+
+        // Convert PDF to images
+        const pdfjsLib = await import("pdfjs-dist");
+        const pdfjsWorker = await import("pdfjs-dist/build/pdf.worker.mjs");
+        pdfjsLib.GlobalWorkerOptions.workerSrc = URL.createObjectURL(
+          new Blob([pdfjsWorker], { type: "application/javascript" })
+        );
+
+        const arrayBuffer = await pdfBlob.arrayBuffer();
+        const pdf = await pdfjsLib.getDocument({ data: arrayBuffer }).promise;
+        const imageUrls = [];
+
+        for (let i = 1; i <= pdf.numPages; i++) {
+          const page = await pdf.getPage(i);
+          const viewport = page.getViewport({ scale: 2 });
+          const canvas = document.createElement("canvas");
+          const context = canvas.getContext("2d");
+          canvas.width = viewport.width;
+          canvas.height = viewport.height;
+
+          await page.render({
+            canvasContext: context,
+            viewport: viewport,
+          }).promise;
+
+          // Add watermark
+          context.save();
+          context.globalAlpha = 0.15;
+          context.fillStyle = "#000000";
+          context.font = "bold 60px Arial";
+          context.textAlign = "center";
+          context.textBaseline = "middle";
+
+          const centerX = canvas.width / 2;
+          const centerY = canvas.height / 2;
+          context.translate(centerX, centerY);
+          context.rotate((-45 * Math.PI) / 180);
+          context.fillText("PREVIEW", 0, 0);
+          context.restore();
+
+          const imageUrl = canvas.toDataURL("image/png");
+          imageUrls.push(imageUrl);
+        }
+
+        setPdfImageUrls((prevUrls) => {
+          return imageUrls;
+        });
+
+        const elapsedTime = Date.now() - startTime;
+        const remainingTime = Math.max(0, 1500 - elapsedTime);
+
+        if (remainingTime > 0) {
+          await new Promise((resolve) => setTimeout(resolve, remainingTime));
+        }
+      } catch (error) {
+        console.error("PDF preview generation error:", error);
+        const elapsedTime = Date.now() - startTime;
+        const remainingTime = Math.max(0, 1500 - elapsedTime);
+        if (remainingTime > 0) {
+          await new Promise((resolve) => setTimeout(resolve, remainingTime));
+        }
+      } finally {
+        setIsGeneratingPdf(false);
+      }
+    };
+
+    const timeoutId = setTimeout(generatePdfPreview, 600);
+    return () => clearTimeout(timeoutId);
+  }, [resume, selected]);
+
+  // Cleanup PDF URL on unmount
+  useEffect(() => {
+    return () => {
+      if (pdfPreviewUrl) {
+        URL.revokeObjectURL(pdfPreviewUrl);
+      }
+    };
+  }, [pdfPreviewUrl]);
 
   const handleDownloadPDF = async () => {
     const element = printRef.current;
@@ -823,9 +949,10 @@ const EditTemplate = () => {
       const opt = {
         margin: 0,
         filename: `${resume.name.replace(/\s+/g, "_")}_Resume.pdf`,
-        image: { type: "jpeg", quality: 0.98 },
-        html2canvas: { scale: 2, useCORS: true },
+        image: { type: "jpeg", quality: 1 },
+        html2canvas: { scale: 2, useCORS: true, windowWidth: 794 },
         jsPDF: { unit: "mm", format: "a4", orientation: "portrait" },
+        pagebreak: { mode: ["avoid-all", "css", "legacy"] },
       };
 
       await html2pdf().set(opt).from(element).save();
@@ -845,9 +972,10 @@ const EditTemplate = () => {
       const opt = {
         margin: 0,
         filename: `${resume.name.replace(/\s+/g, "_")}_Resume.pdf`,
-        image: { type: "jpeg", quality: 0.98 },
-        html2canvas: { scale: 2, useCORS: true },
+        image: { type: "jpeg", quality: 1 },
+        html2canvas: { scale: 2, useCORS: true, windowWidth: 794 },
         jsPDF: { unit: "mm", format: "a4", orientation: "portrait" },
+        pagebreak: { mode: ["avoid-all", "css", "legacy"] },
       };
 
       const pdf = await html2pdf().set(opt).from(element).outputPdf("bloburl");
@@ -936,8 +1064,7 @@ const EditTemplate = () => {
                   overflow: "hidden",
                 }}
                 onClick={() => {
-                  setSelected(t.id);
-                  setResume({ ...t.content });
+                  navigate(`/edit-resume?template=${t.id}`);
                 }}
                 onMouseOver={(e) => {
                   e.currentTarget.style.transform = "translateY(-4px)";
@@ -1112,9 +1239,9 @@ const EditTemplate = () => {
                     fontSize: "clamp(20px, 3vw, 16px)",
                     fontWeight: 600,
                     color: "#333",
-                    padding: "14px 10px"
+                    padding: "14px 10px",
                   }}
-                > 
+                >
                   Edit Resume
                 </h4>
               </div>
@@ -1172,7 +1299,7 @@ const EditTemplate = () => {
                 <div
                   style={{
                     display: "flex",
-                    flexDirection: window.innerWidth <= 480 ? "column" : "row",
+                    flexDirection: window.innerWidth <= 480 ? "row" : "row",
                     gap: 8,
                     overflow: "hidden",
                   }}
@@ -1263,20 +1390,94 @@ const EditTemplate = () => {
                   borderRadius: 8,
                   overflow: "hidden",
                   boxShadow: "var(--shadow-sm)",
+                  background: "#525659",
+                  minHeight: "600px",
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  position: "relative",
                 }}
               >
-                <div
-                  style={{
-                    transform:
-                      window.innerWidth <= 768
-                        ? "scale(1)"
-                        : window.innerWidth <= 1024
-                        ? "scale(0.9)"
-                        : "scale(0.85)",
-                    transformOrigin: "top center",
-                    marginTop: "5px",
-                  }}
-                >
+                {isGeneratingPdf && (
+                  <div
+                    style={{
+                      position: "absolute",
+                      top: 0,
+                      left: 0,
+                      right: 0,
+                      bottom: 0,
+                      background: "rgba(82, 86, 89, 0.9)",
+                      display: "flex",
+                      flexDirection: "column",
+                      alignItems: "center",
+                      justifyContent: "center",
+                      zIndex: 10,
+                    }}
+                  >
+                    <div
+                      style={{
+                        width: "40px",
+                        height: "40px",
+                        border: "4px solid #f3f3f3",
+                        borderTop: "4px solid var(--primary-500)",
+                        borderRadius: "50%",
+                        animation: "spin 1s linear infinite",
+                      }}
+                    />
+                    <div
+                      style={{
+                        color: "#fff",
+                        fontSize: "14px",
+                        marginTop: "16px",
+                        fontWeight: 500,
+                      }}
+                    >
+                      Generating...
+                    </div>
+                  </div>
+                )}
+                {pdfImageUrls.length > 0 ? (
+                  <div
+                    style={{
+                      width: "100%",
+                      maxHeight: "842px",
+                      overflowY: "auto",
+                      opacity: isGeneratingPdf ? 0.3 : 1,
+                      transition: "opacity 0.3s",
+                      background: "#525659",
+                      padding: "16px",
+                    }}
+                  >
+                    {pdfImageUrls.map((imageUrl, index) => (
+                      <img
+                        key={index}
+                        src={imageUrl}
+                        alt={`Page ${index + 1}`}
+                        style={{
+                          width: "100%",
+                          display: "block",
+                          marginBottom:
+                            index < pdfImageUrls.length - 1 ? "16px" : "0",
+                          boxShadow: "0 2px 8px rgba(0, 0, 0, 0.3)",
+                        }}
+                      />
+                    ))}
+                  </div>
+                ) : (
+                  !isGeneratingPdf && (
+                    <div
+                      style={{
+                        color: "#fff",
+                        fontSize: "14px",
+                        textAlign: "center",
+                      }}
+                    >
+                      Select a template to preview
+                    </div>
+                  )
+                )}
+                {/* Hidden div for PDF generation */}
+                <div style={{ position: "absolute", left: "-9999px" }}>
                   <div ref={printRef}>
                     <ResumeView
                       data={resume}

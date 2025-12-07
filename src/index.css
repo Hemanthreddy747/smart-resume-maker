@@ -35,3 +35,12 @@ body {
     linear-gradient(180deg, var(--color-surface) 0%, #fbfdff 100%);
   color: var(--color-text);
 }
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}

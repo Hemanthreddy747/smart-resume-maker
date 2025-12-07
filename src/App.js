@@ -9,6 +9,7 @@ import { AuthProvider } from "./context/AuthContext";
 import Home from "./components/Home";
 import Landing from "./components/Landing";
 import EditTemplate from "./components/EditTemplate";
+import EditResume from "./components/EditResume";
 import Settings from "./components/Settings";
 import PrivateRoute from "./components/PrivateRoute";
 import Navbar from "./components/Navbar";
@@ -41,6 +42,7 @@ function App() {
               }
             />
             <Route path="/edit-template" element={<EditTemplate />} />
+            <Route path="/edit-resume" element={<EditTemplate />} />
             <Route
               path="/settings"
               element={
