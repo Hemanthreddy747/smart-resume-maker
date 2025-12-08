@@ -49,6 +49,7 @@ function ResumeView({
           nameColor: "#1a202c",
           titleColor: "#2d3748",
           skillsLayout: "flex",
+          skillGap: "16px 10px",
           skillBorderRadius: "20px",
           skillPadding: "8px 16px",
         };
@@ -231,7 +232,10 @@ function ResumeView({
     display: "flex",
     gridTemplateColumns: undefined,
     flexWrap: "wrap",
-    gap: templateStyles.skillsLayout === "flex" ? "10px" : 8,
+    gap:
+      templateStyles.skillsLayout === "flex"
+        ? templateStyles.skillGap || "10px"
+        : 8,
     marginTop: 8,
   };
 
@@ -939,6 +943,19 @@ const EditTemplate = () => {
     };
   }, [pdfPreviewUrl]);
 
+  // Helper to create sanitized filename: Name_YYYYMMDD_HHMMSS_Suffix.pdf
+  const createFileName = (name, suffix = "Resume") => {
+    const base =
+      name && name.toString().trim() ? name.toString().trim() : "Untitled";
+    const sanitized = base.replace(/\s+/g, "_").replace(/[^\w-]/g, "");
+    const pad = (n) => n.toString().padStart(2, "0");
+    const now = new Date();
+    const ts = `${now.getFullYear()}${pad(now.getMonth() + 1)}${pad(
+      now.getDate()
+    )}_${pad(now.getHours())}${pad(now.getMinutes())}${pad(now.getSeconds())}`;
+    return `${sanitized}_${ts}_${suffix}.pdf`;
+  };
+
   const handleDownloadPDF = async () => {
     const element = printRef.current;
     if (!element) return;
@@ -948,7 +965,7 @@ const EditTemplate = () => {
 
       const opt = {
         margin: 0,
-        filename: `${resume.name.replace(/\s+/g, "_")}_Resume.pdf`,
+        filename: createFileName(resume?.name || "Untitled", "Resume"),
         image: { type: "jpeg", quality: 1 },
         html2canvas: { scale: 2, useCORS: true, windowWidth: 794 },
         jsPDF: { unit: "mm", format: "a4", orientation: "portrait" },
@@ -971,7 +988,7 @@ const EditTemplate = () => {
 
       const opt = {
         margin: 0,
-        filename: `${resume.name.replace(/\s+/g, "_")}_Resume.pdf`,
+        filename: createFileName(resume?.name || "Untitled", "Resume"),
         image: { type: "jpeg", quality: 1 },
         html2canvas: { scale: 2, useCORS: true, windowWidth: 794 },
         jsPDF: { unit: "mm", format: "a4", orientation: "portrait" },
@@ -1352,7 +1369,10 @@ const EditTemplate = () => {
                       if (!resume) return;
                       try {
                         const payload = {
-                          name: resume.name || "Untitled",
+                          name: createFileName(
+                            resume?.name || "Untitled",
+                            "Resume"
+                          ),
                           templateId: selected,
                           content: resume,
                         };

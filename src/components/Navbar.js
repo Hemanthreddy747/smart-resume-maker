@@ -59,10 +59,20 @@ const Navbar = ({ onSignIn }) => {
           <ul className="nav-links">
             <li>
               <Link className="nav-link" to="/edit-template">
+                Create New{" "}
+              </Link>
+            </li>
+            <li>
+              <Link className="nav-link" to="/edit-template">
                 Templates
               </Link>
             </li>
             <li>
+              <Link className="nav-link" to="/edit-template">
+                My Resume{" "}
+              </Link>
+            </li>
+            {/* <li>
               <button
                 className="nav-link"
                 onClick={() => scrollToSection("features")}
@@ -77,7 +87,7 @@ const Navbar = ({ onSignIn }) => {
               >
                 How it works
               </button>
-            </li>
+            </li> */}
           </ul>
         </nav>
 
