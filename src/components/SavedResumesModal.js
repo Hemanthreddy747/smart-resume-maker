@@ -166,7 +166,8 @@ export default function SavedResumesModal({ isOpen, onClose, onOpenResume }) {
             </div>
             <div style={{ padding: "20px" }}>
               <p style={{ margin: 0, color: "var(--text-primary)" }}>
-                Are you sure you want to delete "{deleteConfirm.name}"? This action cannot be undone.
+                Are you sure you want to delete "{deleteConfirm.name}"? This
+                action cannot be undone.
               </p>
             </div>
             <div
