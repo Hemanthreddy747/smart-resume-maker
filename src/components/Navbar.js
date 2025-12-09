@@ -63,7 +63,7 @@ const Navbar = ({ onSignIn }) => {
               </Link>
             </li>
             <li>
-              <Link className="nav-link" to="/edit-template">
+              <Link className="nav-link" to="/list-templates">
                 Templates
               </Link>
             </li>

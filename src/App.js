@@ -10,6 +10,7 @@ import Home from "./components/Home";
 import Landing from "./components/Landing";
 import EditTemplate from "./components/EditTemplate";
 import EditResume from "./components/EditResume";
+import Templates from "./components/Templates";
 import Settings from "./components/Settings";
 import PrivateRoute from "./components/PrivateRoute";
 import Navbar from "./components/Navbar";
@@ -43,6 +44,7 @@ function App() {
             />
             <Route path="/edit-template" element={<EditTemplate />} />
             <Route path="/edit-resume" element={<EditTemplate />} />
+            <Route path="/list-templates" element={<Templates />} />
             <Route
               path="/settings"
               element={
