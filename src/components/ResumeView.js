@@ -23,6 +23,7 @@ export default function ResumeView({
       : "clamp(20px, 4vw, 40px)",
     background: "var(--bg-primary)",
     width: editable ? "100%" : "210mm",
+    maxWidth: "100%",
     minHeight: "auto",
     margin: "0 auto",
     fontFamily: templateStyles.fontFamily,
