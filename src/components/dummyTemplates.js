@@ -61,7 +61,6 @@ Built monitoring dashboards for system health tracking.`,
         "AWS Certified Solutions Architect – Associate",
         "Google Professional Cloud Developer",
         "Oracle Certified Java Programmer",
-        "Kubernetes & Cloud Native Associate (KCNA)",
       ],
     },
   },
@@ -306,13 +305,7 @@ Achieved average ROAS of 4.5× across paid advertising channels.
 Developed content strategies increasing engagement by 250%.
 Implemented marketing automation increasing conversion rates by 35%.`,
         },
-        {
-          role: "Digital Marketing Specialist – StartupXYZ",
-          years: "2015 – 2017",
-          bullets: `Executed multi-channel campaigns across Google Ads, Facebook, LinkedIn.
-Grew email subscriber list from 2K to 45K in 18 months.
-Created content calendar and managed social media presence.`,
-        },
+       
       ],
       education: [
         {

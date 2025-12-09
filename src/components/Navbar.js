@@ -181,27 +181,33 @@ const Navbar = ({ onSignIn }) => {
       {menuOpen && (
         <div className="mobile-drawer" role="dialog" aria-modal="true">
           <ul>
+            
             <li>
-              <button
+              <Link
                 className="nav-link"
-                onClick={() => {
-                  scrollToSection("features");
-                  setMenuOpen(false);
-                }}
+                to="/edit-template"
+                onClick={() => setMenuOpen(false)}
               >
-                Features
-              </button>
+                Create New
+              </Link>
             </li>
             <li>
-              <button
+              <Link
                 className="nav-link"
-                onClick={() => {
-                  scrollToSection("howitworks");
-                  setMenuOpen(false);
-                }}
+                to="/list-templates"
+                onClick={() => setMenuOpen(false)}
               >
-                How it works
-              </button>
+                Templates
+              </Link>
+            </li>
+            <li>
+              <Link
+                className="nav-link"
+                to="/my-resume"
+                onClick={() => setMenuOpen(false)}
+              >
+                My Resume
+              </Link>
             </li>
             <li className="mobile-actions">
               {currentUser ? (

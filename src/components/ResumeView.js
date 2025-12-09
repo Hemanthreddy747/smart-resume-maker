@@ -752,6 +752,101 @@ export default function ResumeView({
             )}
           </div>
         )}
+
+        {data.customSections && data.customSections.length > 0 && (
+          <>
+            {data.customSections.map(
+              (section, i) =>
+                (editable ||
+                  section.header?.trim() ||
+                  section.content?.trim()) && (
+                  <div key={i} style={sectionContainerStyle}>
+                    {editable ? (
+                      <div>
+                        <input
+                          style={{
+                            ...inputStyle,
+                            fontSize: 19,
+                            fontWeight: 700,
+                            color: templateStyles.primaryColor,
+                            marginTop: 20,
+                            marginBottom: 10,
+                          }}
+                          value={section.header}
+                          onChange={(e) => {
+                            const arr = [...data.customSections];
+                            arr[i].header = e.target.value;
+                            onChange &&
+                              onChange({ ...data, customSections: arr });
+                          }}
+                          placeholder="Section Header"
+                        />
+                        <textarea
+                          style={{
+                            ...inputStyle,
+                            minHeight: 80,
+                            resize: "vertical",
+                          }}
+                          value={section.content}
+                          onChange={(e) => {
+                            const arr = [...data.customSections];
+                            arr[i].content = e.target.value;
+                            onChange &&
+                              onChange({ ...data, customSections: arr });
+                          }}
+                          placeholder="Section Content"
+                        />
+                        <button
+                          style={removeButtonStyle}
+                          onClick={() => {
+                            const arr = data.customSections.filter(
+                              (_, idx) => idx !== i
+                            );
+                            onChange &&
+                              onChange({ ...data, customSections: arr });
+                          }}
+                        >
+                          Remove Section
+                        </button>
+                      </div>
+                    ) : (
+                      <>
+                        <h3 style={sectionTitleStyle}>{section.header}</h3>
+                        <ul style={itemListStyle}>
+                          {section.content
+                            .split("\n")
+                            .filter((line) => line.trim())
+                            .map((line, idx) => (
+                              <li key={idx} style={itemListItemStyle}>
+                                {line}
+                              </li>
+                            ))}
+                        </ul>
+                      </>
+                    )}
+                  </div>
+                )
+            )}
+          </>
+        )}
+
+        {editable && (
+          <button
+            style={{ ...buttonStyle, marginTop: 20 }}
+            onClick={() =>
+              onChange &&
+              onChange({
+                ...data,
+                customSections: [
+                  ...(data.customSections || []),
+                  { header: "", content: "" },
+                ],
+              })
+            }
+          >
+            + Add Custom Section
+          </button>
+        )}
       </div>
     );
   }
@@ -1522,6 +1617,101 @@ export default function ResumeView({
                   </button>
                 )}
               </div>
+            )}
+
+            {data.customSections && data.customSections.length > 0 && (
+              <>
+                {data.customSections.map(
+                  (section, i) =>
+                    (editable ||
+                      section.header?.trim() ||
+                      section.content?.trim()) && (
+                      <div key={i} style={sectionContainerStyle}>
+                        {editable ? (
+                          <div>
+                            <input
+                              style={{
+                                ...inputStyle,
+                                fontSize: 18,
+                                fontWeight: 700,
+                                color: templateStyles.primaryColor,
+                                marginTop: 18,
+                                marginBottom: 10,
+                              }}
+                              value={section.header}
+                              onChange={(e) => {
+                                const arr = [...data.customSections];
+                                arr[i].header = e.target.value;
+                                onChange &&
+                                  onChange({ ...data, customSections: arr });
+                              }}
+                              placeholder="Section Header"
+                            />
+                            <textarea
+                              style={{
+                                ...inputStyle,
+                                minHeight: 80,
+                                resize: "vertical",
+                              }}
+                              value={section.content}
+                              onChange={(e) => {
+                                const arr = [...data.customSections];
+                                arr[i].content = e.target.value;
+                                onChange &&
+                                  onChange({ ...data, customSections: arr });
+                              }}
+                              placeholder="Section Content"
+                            />
+                            <button
+                              style={removeButtonStyle}
+                              onClick={() => {
+                                const arr = data.customSections.filter(
+                                  (_, idx) => idx !== i
+                                );
+                                onChange &&
+                                  onChange({ ...data, customSections: arr });
+                              }}
+                            >
+                              Remove Section
+                            </button>
+                          </div>
+                        ) : (
+                          <>
+                            <h3 style={sectionTitleStyle}>{section.header}</h3>
+                            <ul style={itemListStyle}>
+                              {section.content
+                                .split("\n")
+                                .filter((line) => line.trim())
+                                .map((line, idx) => (
+                                  <li key={idx} style={itemListItemStyle}>
+                                    {line}
+                                  </li>
+                                ))}
+                            </ul>
+                          </>
+                        )}
+                      </div>
+                    )
+                )}
+              </>
+            )}
+
+            {editable && (
+              <button
+                style={{ ...buttonStyle, marginTop: 18 }}
+                onClick={() =>
+                  onChange &&
+                  onChange({
+                    ...data,
+                    customSections: [
+                      ...(data.customSections || []),
+                      { header: "", content: "" },
+                    ],
+                  })
+                }
+              >
+                + Add Custom Section
+              </button>
             )}
           </div>
         </div>
@@ -2297,7 +2487,7 @@ export default function ResumeView({
                 marginLeft: 48,
                 display: "grid",
                 gridTemplateColumns: "repeat(auto-fill, minmax(240px, 1fr))",
-                gap: 10,
+                gap: 12,
               }}
             >
               {data.certifications.map((cert, i) => (
@@ -2378,6 +2568,141 @@ export default function ResumeView({
               </button>
             )}
           </div>
+        )}
+
+        {data.customSections && data.customSections.length > 0 && (
+          <>
+            {data.customSections.map(
+              (section, i) =>
+                (editable ||
+                  section.header?.trim() ||
+                  section.content?.trim()) && (
+                  <div key={i} style={sectionContainerStyle}>
+                    <div
+                      style={{
+                        display: "flex",
+                        alignItems: "center",
+                        gap: 12,
+                        marginBottom: 12,
+                      }}
+                    >
+                      <div
+                        style={{
+                          width: 36,
+                          height: 36,
+                          borderRadius: "50%",
+                          background:
+                            templateStyles.sectionIconBg ||
+                            templateStyles.accentColor,
+                          display: "flex",
+                          alignItems: "center",
+                          justifyContent: "center",
+                          color: "#ffffff",
+                          fontSize: 18,
+                          fontWeight: 700,
+                          flexShrink: 0,
+                        }}
+                      >
+                        +
+                      </div>
+                      {editable ? (
+                        <input
+                          style={{
+                            ...inputStyle,
+                            margin: 0,
+                            fontSize: 18,
+                            fontWeight: 700,
+                            color: templateStyles.primaryColor,
+                          }}
+                          value={section.header}
+                          onChange={(e) => {
+                            const arr = [...data.customSections];
+                            arr[i].header = e.target.value;
+                            onChange &&
+                              onChange({ ...data, customSections: arr });
+                          }}
+                          placeholder="Section Header"
+                        />
+                      ) : (
+                        <h3
+                          style={{
+                            margin: 0,
+                            fontSize: forPrint
+                              ? "18px"
+                              : "clamp(16px, 3vw, 18px)",
+                            fontWeight: 700,
+                            color: templateStyles.primaryColor,
+                          }}
+                        >
+                          {section.header}
+                        </h3>
+                      )}
+                    </div>
+                    {editable ? (
+                      <textarea
+                        style={{
+                          ...inputStyle,
+                          minHeight: 80,
+                          resize: "vertical",
+                          marginLeft: 48,
+                        }}
+                        value={section.content}
+                        onChange={(e) => {
+                          const arr = [...data.customSections];
+                          arr[i].content = e.target.value;
+                          onChange &&
+                            onChange({ ...data, customSections: arr });
+                        }}
+                        placeholder="Section Content"
+                      />
+                    ) : (
+                      <ul style={{ ...itemListStyle, marginLeft: 48 }}>
+                        {section.content
+                          .split("\n")
+                          .filter((line) => line.trim())
+                          .map((line, idx) => (
+                            <li key={idx} style={itemListItemStyle}>
+                              {line}
+                            </li>
+                          ))}
+                      </ul>
+                    )}
+                    {editable && (
+                      <button
+                        style={{ ...removeButtonStyle, marginLeft: 48 }}
+                        onClick={() => {
+                          const arr = data.customSections.filter(
+                            (_, idx) => idx !== i
+                          );
+                          onChange &&
+                            onChange({ ...data, customSections: arr });
+                        }}
+                      >
+                        Remove Section
+                      </button>
+                    )}
+                  </div>
+                )
+            )}
+          </>
+        )}
+
+        {editable && (
+          <button
+            style={{ ...buttonStyle, marginLeft: 18, marginTop: 10 }}
+            onClick={() =>
+              onChange &&
+              onChange({
+                ...data,
+                customSections: [
+                  ...(data.customSections || []),
+                  { header: "", content: "" },
+                ],
+              })
+            }
+          >
+            + Add Custom Section
+          </button>
         )}
       </div>
     );
@@ -3019,6 +3344,119 @@ export default function ResumeView({
                 </button>
               )}
             </div>
+          )}
+
+          {data.customSections && data.customSections.length > 0 && (
+            <>
+              {data.customSections.map(
+                (section, i) =>
+                  (editable ||
+                    section.header?.trim() ||
+                    section.content?.trim()) && (
+                    <div key={i} style={sectionContainerStyle}>
+                      <h3
+                        style={{
+                          background:
+                            templateStyles.sectionHeaderBg ||
+                            templateStyles.accentColor,
+                          color: templateStyles.sectionHeaderColor || "#ffffff",
+                          padding: "10px 16px",
+                          margin: 0,
+                          marginBottom: 12,
+                          fontSize: forPrint
+                            ? "15px"
+                            : "clamp(14px, 3vw, 15px)",
+                          fontWeight: 700,
+                          letterSpacing: "1px",
+                          textTransform: "uppercase",
+                        }}
+                      >
+                        {editable ? (
+                          <input
+                            style={{
+                              ...inputStyle,
+                              margin: 0,
+                              background: "rgba(255,255,255,0.1)",
+                              border: "1px solid rgba(255,255,255,0.3)",
+                              color: "#fff",
+                            }}
+                            value={section.header}
+                            onChange={(e) => {
+                              const arr = [...data.customSections];
+                              arr[i].header = e.target.value;
+                              onChange &&
+                                onChange({ ...data, customSections: arr });
+                            }}
+                            placeholder="Section Header"
+                          />
+                        ) : (
+                          section.header
+                        )}
+                      </h3>
+                      {editable ? (
+                        <textarea
+                          style={{
+                            ...inputStyle,
+                            minHeight: 80,
+                            resize: "vertical",
+                          }}
+                          value={section.content}
+                          onChange={(e) => {
+                            const arr = [...data.customSections];
+                            arr[i].content = e.target.value;
+                            onChange &&
+                              onChange({ ...data, customSections: arr });
+                          }}
+                          placeholder="Section Content"
+                        />
+                      ) : (
+                        <ul style={{ ...itemListStyle }}>
+                          {section.content
+                            .split("\n")
+                            .filter((line) => line.trim())
+                            .map((line, idx) => (
+                              <li key={idx} style={itemListItemStyle}>
+                                {line}
+                              </li>
+                            ))}
+                        </ul>
+                      )}
+                      {editable && (
+                        <button
+                          style={removeButtonStyle}
+                          onClick={() => {
+                            const arr = data.customSections.filter(
+                              (_, idx) => idx !== i
+                            );
+                            onChange &&
+                              onChange({ ...data, customSections: arr });
+                          }}
+                        >
+                          Remove Section
+                        </button>
+                      )}
+                    </div>
+                  )
+              )}
+            </>
+          )}
+
+          {editable && (
+            <button
+              style={{ ...buttonStyle, marginTop: 12 }}
+              onClick={() =>
+                onChange &&
+                onChange({
+                  ...data,
+                  customSections: [
+                    ...(data.customSections || []),
+                    { header: "", content: "" },
+                  ],
+                })
+              }
+            >
+              + Add Custom Section
+            </button>
           )}
         </div>
       </div>
