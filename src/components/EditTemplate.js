@@ -4,6 +4,7 @@ import dummyTemplates from "./dummyTemplates";
 import "./TemplateStyles.css";
 import SavedResumesModal from "./SavedResumesModal";
 import { saveResume } from "./db";
+import { getTemplateStyles } from "../config/templateConfigs";
 
 function ResumeView({
   data,
@@ -15,85 +16,7 @@ function ResumeView({
 }) {
   if (!data) return null;
 
-  // Template-specific styles
-  const getTemplateStyles = () => {
-    switch (templateId) {
-      case 1: // Classic Professional - Traditional blue theme
-        return {
-          primaryColor: "#2b6cb0",
-          secondaryColor: "#3182ce",
-          accentBg: "#ebf4ff",
-          fontFamily: "'Inter', Arial, sans-serif",
-          headerAlign: "center",
-          sectionBorderStyle: "2px solid #2b6cb0",
-          skillBadgeBg: "#ebf4ff",
-          skillBadgeColor: "#1a365d",
-          nameColor: "#000",
-          titleColor: "#000",
-          skillsLayout: "grid",
-          skillBorderRadius: "4px",
-          skillPadding: "6px 10px",
-        };
-      case 2: // Modern Executive - Elegant dark theme
-        return {
-          primaryColor: "#1a202c",
-          secondaryColor: "#2d3748",
-          accentBg: "#edf2f7",
-          fontFamily: "'Georgia', serif",
-          headerAlign: "left",
-          sectionBorderStyle: "none",
-          sectionUnderline: "3px solid #1a202c",
-          skillBadgeBg: "transparent",
-          skillBadgeColor: "#1a202c",
-          skillBorder: "1px solid #cbd5e0",
-          nameColor: "#1a202c",
-          titleColor: "#2d3748",
-          skillsLayout: "flex",
-          skillGap: "16px 10px",
-          skillBorderRadius: "20px",
-          skillPadding: "8px 16px",
-        };
-      case 3: // Creative Gradient - Vibrant modern design
-        return {
-          primaryColor: "#ec4899",
-          secondaryColor: "#8b5cf6",
-          accentBg: "linear-gradient(135deg, #fce7f3 0%, #ede9fe 100%)",
-          fontFamily: "'Poppins', 'Segoe UI', sans-serif",
-          headerAlign: "center",
-          sectionBorderStyle: "none",
-          sectionGradient: "linear-gradient(90deg, #ec4899 0%, #8b5cf6 100%)",
-          sectionBgGradient:
-            "linear-gradient(135deg, #fdf2f8 0%, #f5f3ff 100%)",
-          skillBadgeBg: "linear-gradient(135deg, #f9a8d4 0%, #c4b5fd 100%)",
-          skillBadgeColor: "#ffffff",
-          nameColor: "#1f2937",
-          titleColor: "#6b7280",
-          titleBg: "linear-gradient(135deg, #fce7f3 0%, #ede9fe 100%)",
-          skillsLayout: "flex",
-          skillBorderRadius: "25px",
-          skillPadding: "6px 20px",
-          skillShadow: "0 4px 6px rgba(139, 92, 246, 0.2)",
-        };
-      default:
-        return {
-          primaryColor: "#2b6cb0",
-          secondaryColor: "#3182ce",
-          accentBg: "#ebf4ff",
-          fontFamily: "'Inter', Arial, sans-serif",
-          headerAlign: "center",
-          sectionBorderStyle: "2px solid #2b6cb0",
-          skillBadgeBg: "#ebf4ff",
-          skillBadgeColor: "#1a365d",
-          nameColor: "#000",
-          titleColor: "#000",
-          skillsLayout: "grid",
-          skillBorderRadius: "4px",
-          skillPadding: "6px 10px",
-        };
-    }
-  };
-
-  const templateStyles = getTemplateStyles();
+  const templateStyles = getTemplateStyles(templateId);
 
   const containerStyle = {
     border: "none",
@@ -104,13 +27,14 @@ function ResumeView({
       ? "40px"
       : "clamp(20px, 4vw, 40px)",
     background: "var(--bg-primary)",
-    width: isPreview
-      ? "100%"
-      : forPrint
-      ? "210mm"
-      : editable
-      ? "100%"
-      : "210mm",
+    // width: isPreview
+    //   ? "100%"
+    //   : forPrint
+    //   ? "210mm"
+    //   : editable
+    //   ? "100%"
+    //   : "210mm",
+    width: "210mm",
     minHeight: "auto",
     margin: "0 auto",
     fontFamily: templateStyles.fontFamily,
