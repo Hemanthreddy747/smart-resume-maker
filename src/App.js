@@ -12,6 +12,7 @@ import EditTemplate from "./components/EditTemplate";
 import EditResume from "./components/EditResume";
 import Templates from "./components/Templates";
 import Settings from "./components/Settings";
+import MyResume from "./components/MyResume";
 import PrivateRoute from "./components/PrivateRoute";
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
@@ -45,6 +46,7 @@ function App() {
             <Route path="/edit-template" element={<EditTemplate />} />
             <Route path="/edit-resume" element={<EditTemplate />} />
             <Route path="/list-templates" element={<Templates />} />
+            <Route path="/my-resume" element={<MyResume />} />
             <Route
               path="/settings"
               element={

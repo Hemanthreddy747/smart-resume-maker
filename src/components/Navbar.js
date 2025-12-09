@@ -68,11 +68,10 @@ const Navbar = ({ onSignIn }) => {
               </Link>
             </li>
             <li>
-              <Link className="nav-link" >
+              <Link className="nav-link" to="/my-resume">
                 My Resume{" "}
               </Link>
             </li>
-          
           </ul>
         </nav>
 
