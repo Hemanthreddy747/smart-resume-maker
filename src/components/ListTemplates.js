@@ -39,13 +39,13 @@ const ListTemplates = ({ onOpenSaved, onSelectTemplate, renderPreview }) => {
             border: "none",
             borderRadius: 6,
             cursor: "pointer",
-            fontSize: "clamp(12px, 2.2vw, 13px)",
+            fontSize: "clamp(14px, 2.5vw, 15px)",
             fontWeight: 600,
             whiteSpace: "nowrap",
           }}
           onClick={onOpenSaved}
         >
-          Open Saved Resumes
+          Open My Saved Resumes
         </button>
       </div>
 

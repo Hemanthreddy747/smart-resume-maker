@@ -56,6 +56,7 @@ const button = {
 export default function SavedResumesModal({ isOpen, onClose, onOpenResume }) {
   const [items, setItems] = useState([]);
   const [loading, setLoading] = useState(false);
+  const [deleteConfirm, setDeleteConfirm] = useState(null);
 
   useEffect(() => {
     if (!isOpen) return;
@@ -117,11 +118,7 @@ export default function SavedResumesModal({ isOpen, onClose, onOpenResume }) {
                       background: "var(--error)",
                       color: "var(--text-inverse)",
                     }}
-                    onClick={async () => {
-                      await deleteResume(item.id);
-                      const res = await getAllResumes();
-                      setItems(res);
-                    }}
+                    onClick={() => setDeleteConfirm(item)}
                   >
                     Delete
                   </button>
@@ -130,6 +127,86 @@ export default function SavedResumesModal({ isOpen, onClose, onOpenResume }) {
             ))}
         </div>
       </div>
+
+      {deleteConfirm && (
+        <div
+          style={{
+            position: "fixed",
+            top: 0,
+            left: 0,
+            right: 0,
+            bottom: 0,
+            background: "rgba(0,0,0,0.5)",
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            zIndex: 1001,
+          }}
+          onClick={() => setDeleteConfirm(null)}
+        >
+          <div
+            style={{
+              background: "var(--bg-primary)",
+              borderRadius: 8,
+              width: "min(400px, 90vw)",
+              boxShadow: "0 4px 20px rgba(0,0,0,0.3)",
+              overflow: "hidden",
+            }}
+            onClick={(e) => e.stopPropagation()}
+          >
+            <div
+              style={{
+                padding: "16px 20px",
+                borderBottom: "1px solid var(--border-light)",
+              }}
+            >
+              <h5 style={{ margin: 0, fontSize: 18, fontWeight: 600 }}>
+                Confirm Delete
+              </h5>
+            </div>
+            <div style={{ padding: "20px" }}>
+              <p style={{ margin: 0, color: "var(--text-primary)" }}>
+                Are you sure you want to delete "{deleteConfirm.name}"? This action cannot be undone.
+              </p>
+            </div>
+            <div
+              style={{
+                padding: "12px 20px",
+                borderTop: "1px solid var(--border-light)",
+                display: "flex",
+                justifyContent: "flex-end",
+                gap: 10,
+              }}
+            >
+              <button
+                style={{
+                  ...button,
+                  background: "var(--gray-200)",
+                  color: "var(--text-primary)",
+                }}
+                onClick={() => setDeleteConfirm(null)}
+              >
+                Cancel
+              </button>
+              <button
+                style={{
+                  ...button,
+                  background: "var(--error)",
+                  color: "var(--text-inverse)",
+                }}
+                onClick={async () => {
+                  await deleteResume(deleteConfirm.id);
+                  const res = await getAllResumes();
+                  setItems(res);
+                  setDeleteConfirm(null);
+                }}
+              >
+                Delete
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 }

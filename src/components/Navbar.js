@@ -68,26 +68,11 @@ const Navbar = ({ onSignIn }) => {
               </Link>
             </li>
             <li>
-              <Link className="nav-link" to="/edit-template">
+              <Link className="nav-link" >
                 My Resume{" "}
               </Link>
             </li>
-            {/* <li>
-              <button
-                className="nav-link"
-                onClick={() => scrollToSection("features")}
-              >
-                Features
-              </button>
-            </li>
-            <li>
-              <button
-                className="nav-link"
-                onClick={() => scrollToSection("howitworks")}
-              >
-                How it works
-              </button>
-            </li> */}
+          
           </ul>
         </nav>
 
