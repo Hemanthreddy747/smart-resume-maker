@@ -18,27 +18,78 @@
 
 /* Additional template styles for future templates */
 .template-3 {
-  --template-primary: #059669;
-  --template-secondary: #10b981;
-  --template-accent-bg: #d1fae5;
-  --template-accent-text: #064e3b;
-  --template-font: "Arial", sans-serif;
+  --template-primary: #ff5f9e;
+  --template-secondary: #7c3aed;
+  --template-accent-bg: linear-gradient(180deg, #fff6fb 0%, #f6f3ff 100%);
+  --template-accent-text: #2b0b2b;
+  --template-font: "Poppins", "Segoe UI", sans-serif;
+  --template-sidebar-bg: linear-gradient(180deg, #fff6fb 0%, #f3f0ff 100%);
+  --template-sidebar-width: 36%;
+  --template-skill-badge-bg: linear-gradient(135deg, #ffd7ec 0%, #d7c9ff 100%);
+  --template-skill-badge-color: #3b0b3b;
+  --template-skill-radius: 18px;
+  --template-skill-padding: 6px 14px;
+  --template-section-gradient: linear-gradient(90deg, #ff5f9e 0%, #7c3aed 100%);
+  --template-shadow-soft: 0 6px 18px rgba(124, 58, 237, 0.12);
 }
 
 .template-4 {
-  --template-primary: #7c3aed;
-  --template-secondary: #8b5cf6;
-  --template-accent-bg: #ede9fe;
-  --template-accent-text: #5b21b6;
-  --template-font: "Helvetica", sans-serif;
+  --template-primary: #6366f1;
+  --template-secondary: #818cf8;
+  --template-accent-bg: #eef2ff;
+  --template-accent-text: #4338ca;
+  --template-font: "Inter", -apple-system, sans-serif;
+  --template-left-border: 6px solid #6366f1;
+  --template-skill-badge-bg: transparent;
+  --template-skill-badge-color: #4338ca;
+  --template-skill-border: 1.5px solid #c7d2fe;
+  --template-skill-radius: 16px;
+  --template-skill-padding: 5px 12px;
+  --template-name-color: #111827;
+  --template-title-color: #6b7280;
+  --template-section-bg: #f9fafb;
 }
 
 .template-5 {
-  --template-primary: #dc2626;
-  --template-secondary: #ef4444;
-  --template-accent-bg: #fee2e2;
-  --template-accent-text: #991b1b;
-  --template-font: "Verdana", sans-serif;
+  --template-primary: #0e7490;
+  --template-secondary: #06b6d4;
+  --template-accent-color: #0891b2;
+  --template-accent-bg: #ecfeff;
+  --template-accent-text: #164e63;
+  --template-font: "Roboto", Arial, sans-serif;
+  --template-timeline-color: #06b6d4;
+  --template-timeline-dot: 14px;
+  --template-skill-badge-bg: linear-gradient(135deg, #06b6d4 0%, #0891b2 100%);
+  --template-skill-badge-color: #ffffff;
+  --template-skill-radius: 20px;
+  --template-skill-padding: 7px 16px;
+  --template-name-color: #0f172a;
+  --template-title-color: #0891b2;
+  --template-section-icon-bg: linear-gradient(135deg, #06b6d4 0%, #0891b2 100%);
+  --template-card-bg: #ffffff;
+  --template-card-border: 1px solid #e0f2fe;
+  --template-card-shadow: 0 2px 8px rgba(6, 182, 212, 0.1);
+}
+
+.template-6 {
+  --template-primary: #1e3a8a;
+  --template-secondary: #3b82f6;
+  --template-accent-color: #1e40af;
+  --template-accent-bg: #eff6ff;
+  --template-accent-text: #1e40af;
+  --template-font: "Lato", "Segoe UI", sans-serif;
+  --template-left-column-bg: #f8fafc;
+  --template-left-column-width: 30%;
+  --template-section-title-bg: #1e3a8a;
+  --template-section-title-color: #ffffff;
+  --template-skill-badge-bg: #f0f9ff;
+  --template-skill-badge-color: #1e3a8a;
+  --template-skill-border: 1px solid #bfdbfe;
+  --template-skill-radius: 4px;
+  --template-skill-padding: 6px 12px;
+  --template-name-color: #1e3a8a;
+  --template-title-color: #64748b;
+  --template-divider-color: #cbd5e1;
 }
 
 .template-6 {
