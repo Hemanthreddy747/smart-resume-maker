@@ -37,7 +37,25 @@ export const templateConfigs = {
     skillPadding: "8px 16px",
   },
   3: {
-   
+    name: "Creative Gradient",
+    description: "Vibrant modern design",
+    primaryColor: "#ec4899",
+    secondaryColor: "#8b5cf6",
+    accentBg: "linear-gradient(135deg, #fce7f3 0%, #ede9fe 100%)",
+    fontFamily: "'Poppins', 'Segoe UI', sans-serif",
+    headerAlign: "center",
+    sectionBorderStyle: "none",
+    sectionGradient: "linear-gradient(90deg, #ec4899 0%, #8b5cf6 100%)",
+    sectionBgGradient: "linear-gradient(135deg, #fdf2f8 0%, #f5f3ff 100%)",
+    skillBadgeBg: "linear-gradient(135deg, #f9a8d4 0%, #c4b5fd 100%)",
+    skillBadgeColor: "#ffffff",
+    nameColor: "#1f2937",
+    titleColor: "#6b7280",
+    titleBg: "linear-gradient(135deg, #fce7f3 0%, #ede9fe 100%)",
+    skillsLayout: "flex",
+    skillBorderRadius: "25px",
+    skillPadding: "6px 20px",
+    skillShadow: "0 4px 6px rgba(139, 92, 246, 0.2)",
   },
 };
 
