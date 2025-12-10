@@ -1,0 +1,35 @@
+/* Toastify overrides: force white text for toast messages and controls */
+.Toastify__toast,
+.Toastify__toast * {
+  color: #fff !important;
+}
+
+.Toastify__toast-body {
+  color: #fff !important;
+}
+
+.Toastify__close-button {
+  color: #fff !important;
+  opacity: 0.9;
+}
+.Toastify__close-button svg {
+  fill: #fff !important;
+}
+
+.Toastify__progress-bar {
+  background: rgba(255, 255, 255, 0.6) !important;
+}
+
+.Toastify__toast-icon svg,
+.Toastify__toast-icon {
+  fill: #fff !important;
+  color: #fff !important;
+}
+
+/* Specific toast type bodies (extra specificity if needed) */
+.Toastify__toast--success .Toastify__toast-body,
+.Toastify__toast--info .Toastify__toast-body,
+.Toastify__toast--warning .Toastify__toast-body,
+.Toastify__toast--error .Toastify__toast-body {
+  color: #fff !important;
+}

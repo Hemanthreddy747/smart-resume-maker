@@ -7,6 +7,10 @@ import ListTemplates from "./ListTemplates";
 import { saveResume } from "./db";
 import ResumeView from "./ResumeView";
 
+import EnhanceAIButton from "./EnhanceAIButton";
+import MatchWithJobButton from "./MatchWithJobButton";
+import { showSuccess, showError } from "./Toasts";
+
 // ResumeView moved to ./ResumeView
 
 const EditTemplate = () => {
@@ -186,7 +190,7 @@ const EditTemplate = () => {
 
       await html2pdf().set(opt).from(element).save();
     } catch (error) {
-      alert("Please install html2pdf.js: npm install html2pdf.js");
+      showError("Please install html2pdf.js: npm install html2pdf.js");
       console.error("PDF generation error:", error);
     }
   };
@@ -215,7 +219,7 @@ const EditTemplate = () => {
         };
       }
     } catch (error) {
-      alert("Please install html2pdf.js: npm install html2pdf.js");
+      showError("Please install html2pdf.js: npm install html2pdf.js");
       console.error("PDF generation error:", error);
     }
   };
@@ -265,8 +269,6 @@ const EditTemplate = () => {
             minHeight: "100vh",
           }}
         >
-          
-
           <div
             style={{
               display: "flex",
@@ -291,7 +293,7 @@ const EditTemplate = () => {
                   marginBottom: 12,
                   display: "flex",
                   alignItems: "center",
-                  minHeight: 52,
+                  minHeight: 80,
                 }}
               >
                 <h4
@@ -304,6 +306,20 @@ const EditTemplate = () => {
                 >
                   Edit Resume
                 </h4>
+                <div style={{ marginLeft: "auto", display: "flex", gap: 8 }}>
+                  <EnhanceAIButton
+                    onClick={() =>
+                      showSuccess("Enhance  with AI - feature coming soon")
+                    }
+                  />
+                  <MatchWithJobButton
+                    onClick={() =>
+                      showSuccess(
+                        "Match with Job Description - feature coming soon"
+                      )
+                    }
+                  />
+                </div>
               </div>
               <div
                 style={{
@@ -344,7 +360,7 @@ const EditTemplate = () => {
                   justifyContent: "space-between",
                   alignItems: window.innerWidth <= 640 ? "stretch" : "center",
                   gap: 8,
-                  minHeight: 52,
+                  minHeight: 80,
                 }}
               >
                 <h4
@@ -421,10 +437,10 @@ const EditTemplate = () => {
                           content: resume,
                         };
                         await saveResume(payload);
-                        alert("Resume saved to browser.");
+                        showSuccess("Resume saved to browser.");
                       } catch (e) {
                         console.error(e);
-                        alert("Failed to save resume.");
+                        showError("Failed to save resume.");
                       }
                     }}
                   >

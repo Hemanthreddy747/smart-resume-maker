@@ -305,7 +305,6 @@ Achieved average ROAS of 4.5× across paid advertising channels.
 Developed content strategies increasing engagement by 250%.
 Implemented marketing automation increasing conversion rates by 35%.`,
         },
-       
       ],
       education: [
         {
@@ -482,6 +481,16 @@ Supported implementation of security controls and policies.`,
         "WordPress / CMS",
         "Google Analytics",
         "Team Management",
+        "Content Strategy",
+        "Copywriting",
+        "SEO Optimization",
+        "Brand Storytelling",
+        "Editorial Leadership",
+        "Content Marketing",
+        "Social Media Writing",
+        "WordPress / CMS",
+        "Google Analytics",
+        "Team Management",
       ],
       experience: [
         {
@@ -526,6 +535,8 @@ Collaborated with designers and developers on content integration.`,
         "Google Analytics Certified",
         "Content Marketing Institute Certification",
         "Copyblogger Certified Content Marketer",
+        "Google Analytics Certified",
+        "Content Marketing Institute Certification",
       ],
     },
   },
@@ -588,8 +599,7 @@ Published 10+ apps to App Store and Google Play.`,
       certifications: [
         "Apple Certified iOS Developer",
         "Google Associate Android Developer",
-        "Meta React Native Certification",
-        "AWS Certified Mobile Developer",
+  
       ],
     },
   },
@@ -657,8 +667,7 @@ Administered employee benefits and handled employee relations.`,
       certifications: [
         "SHRM Senior Certified Professional (SHRM-SCP)",
         "Professional in Human Resources (PHR)",
-        "Certified Diversity Professional (CDP)",
-        "LinkedIn Talent Solutions Certified",
+      
       ],
     },
   },

@@ -29,17 +29,38 @@ body {
 }
 
 .Toastify__toast--success {
-  background: linear-gradient(45deg, #4caf50, #45a049);
+  background: linear-gradient(45deg, #46c84a, #46c84a);
 }
 
 .Toastify__toast--error {
-  background: linear-gradient(45deg, #f44336, #d32f2f);
+  background: linear-gradient(45deg, #d94a3f, #d94a3f);
 }
 
 .Toastify__toast--warning {
-  background: linear-gradient(45deg, #ff9800, #f57c00);
+  background: linear-gradient(45deg, #d9a142, #d9a142);
 }
 
 .Toastify__toast--info {
-  background: linear-gradient(45deg, #2196f3, #1976d2);
+  background: linear-gradient(45deg, #3f95e6, #3f95e6);
 }
+
+/* Ensure toast text and icons are white while keeping colored backgrounds */
+
+.Toastify__toast svg,
+.Toastify__toast svg *,
+.Toastify__toast path,
+.Toastify__toast circle,
+.Toastify__toast rect {
+  fill: #ffffff !important;
+  stroke: #ffffff !important;
+}
+
+.Toastify__close-button,
+.Toastify__close-button svg {
+  color: #ffffff !important;
+  fill: #ffffff !important;
+}
+
+/* .Toastify__progress-bar {
+  background: rgba(255, 255, 255, 0.25) !important;
+} */
