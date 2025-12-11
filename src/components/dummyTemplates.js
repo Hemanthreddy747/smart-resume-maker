@@ -599,7 +599,6 @@ Published 10+ apps to App Store and Google Play.`,
       certifications: [
         "Apple Certified iOS Developer",
         "Google Associate Android Developer",
-  
       ],
     },
   },
@@ -667,7 +666,177 @@ Administered employee benefits and handled employee relations.`,
       certifications: [
         "SHRM Senior Certified Professional (SHRM-SCP)",
         "Professional in Human Resources (PHR)",
-      
+      ],
+    },
+  },
+  {
+    id: 11,
+    name: "Fresher Clean",
+    content: {
+      name: "Ravi Kumar",
+      title: "Junior Software Developer",
+      email: "ravi.kumar@example.com",
+      phone: "+91 98765 43210",
+      website: "ravi.codes",
+      summary:
+        "Entry-level Software Developer with 1 year of internship experience focused on front-end development and building responsive web apps. Familiar with JavaScript, React, and basic backend integration.",
+      skills: [
+        "JavaScript",
+        "React",
+        "HTML / CSS",
+        "Git",
+        "REST APIs",
+        "Basic Node.js",
+      ],
+      experience: [
+        {
+          role: "Frontend Intern – Startup Labs",
+          years: "2023 – 2024",
+          bullets: `Built responsive components in React used across marketing and dashboard pages.
+Collaborated with designers to implement accessible UI patterns.
+Wrote unit tests and improved load times by optimizing assets.`,
+        },
+      ],
+      education: [
+        {
+          degree: "Bachelor of Technology – Computer Science",
+          years: "2020 – 2024",
+          details: "University of Bengaluru · CGPA: 8.1/10",
+        },
+      ],
+      certifications: [
+        "Frontend Web Development (Coursera)",
+        "JavaScript Fundamentals",
+      ],
+    },
+  },
+  {
+    id: 12,
+    name: "Campus Grad Minimal",
+    content: {
+      name: "Priya Singh",
+      title: "Graduate — Data Analyst",
+      email: "priya.singh@example.com",
+      phone: "+91 91234 56789",
+      website: "priyasingh.dev",
+      summary:
+        "Recent graduate with strong analytical skills and hands-on projects in data cleaning, visualization, and basic machine learning (0-2 years). Comfortable with Python, SQL and visualization libraries.",
+      skills: [
+        "Python",
+        "Pandas / NumPy",
+        "SQL",
+        "Tableau / Power BI",
+        "Data Visualization",
+      ],
+      experience: [
+        {
+          role: "Data Science Intern – AnalyticsHub",
+          years: "2024",
+          bullets: `Cleaned and merged multiple datasets to produce weekly business reports.
+Created visual dashboards in Tableau used by the sales team to track KPIs.
+Performed exploratory data analysis to identify churn signals.`,
+        },
+        {
+          role: "Academic Project – Campus Placements",
+          years: "2023",
+          bullets: `Built a predictive model to classify student placement outcomes (accuracy 78%).
+Presented findings to faculty and incorporated feedback into final report.`,
+        },
+      ],
+      education: [
+        {
+          degree: "Bachelor of Science – Statistics",
+          years: "2020 – 2024",
+          details: "Delhi University · Percentage: 72%",
+        },
+      ],
+      certifications: [
+        "Data Analysis with Python (IBM)",
+        "SQL for Data Science",
+      ],
+    },
+  },
+  {
+    id: 13,
+    name: "Fresher Pop",
+    content: {
+      name: "Aman Verma",
+      title: "Junior UX/UI Designer",
+      email: "aman.verma@example.com",
+      phone: "+91 98700 11223",
+      website: "aman.design",
+      summary:
+        "Recent graduate and UX enthusiast with internship experience focused on user research, prototyping, and accessible interfaces (1 year). Skilled in Figma, basic HTML/CSS and collaborating with cross-functional teams.",
+      skills: [
+        "Figma",
+        "User Research",
+        "Prototyping",
+        "HTML / CSS",
+        "Accessibility",
+      ],
+      experience: [
+        {
+          role: "UX Intern – BrightStudio",
+          years: "2024",
+          bullets: `Conducted user interviews and usability tests for mobile app flows.
+  Designed high-fidelity prototypes and handed off assets to developers.
+  Improved onboarding completion by simplifying task steps.`,
+        },
+      ],
+      education: [
+        {
+          degree: "Bachelor of Design – Interaction Design",
+          years: "2020 – 2024",
+          details: "National Institute of Design · CGPA: 7.8/10",
+        },
+      ],
+      certifications: ["UX Design Fundamentals", "Accessibility Basics"],
+    },
+  },
+  {
+    id: 14,
+    name: "Fresher Neo",
+    content: {
+      name: "Neha Rao",
+      title: "Junior Frontend Developer",
+      email: "neha.rao@example.com",
+      phone: "+91 99876 54321",
+      website: "nehar.dev",
+      summary:
+        "Energetic recent graduate with 1 year of internship experience and strong foundations in modern frontend frameworks. Passionate about crafting accessible, responsive user interfaces and eager to grow as a frontend engineer.",
+      skills: [
+        "JavaScript",
+        "React",
+        "HTML / CSS",
+        "Responsive Design",
+        "TypeScript (basic)",
+        "Accessibility",
+      ],
+      experience: [
+        {
+          role: "Frontend Intern – PixelForge",
+          years: "2024",
+          bullets: `Implemented responsive landing pages using React and CSS modules.
+Improved accessibility of forms and navigation; reduced keyboard-trap issues.
+Built reusable UI components and documented storybook stories for each.`,
+        },
+        {
+          role: "Academic Project – Campus App",
+          years: "2023",
+          bullets: `Built a campus events web app using React and Firebase.
+Integrated authentication and realtime updates for event registrations.`,
+        },
+      ],
+      education: [
+        {
+          degree: "Bachelor of Technology – Computer Science",
+          years: "2020 – 2024",
+          details: "IIIT Hyderabad · CGPA: 8.3/10",
+        },
+      ],
+      certifications: [
+        "Frontend Web Development (Coursera)",
+        "Accessibility Basics",
       ],
     },
   },

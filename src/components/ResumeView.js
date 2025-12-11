@@ -1,5 +1,6 @@
 import React from "react";
 import { getTemplateStyles } from "../config/templateConfigs";
+import dummyTemplates from "./dummyTemplates";
 
 export default function ResumeView({
   data,
@@ -12,6 +13,28 @@ export default function ResumeView({
   if (!data) return null;
 
   const templateStyles = getTemplateStyles(templateId);
+
+  const getYearsFromSummary = (summary) => {
+    if (!summary) return null;
+    const m = summary.match(/(\d+)\+?\s*years?/i);
+    if (m) return parseInt(m[1], 10);
+    return null;
+  };
+
+  const isFresherTemplate = (() => {
+    try {
+      const t = dummyTemplates.find((tp) => tp.id == templateId);
+      if (!t) return false;
+      const years = getYearsFromSummary(t.content && t.content.summary);
+      return years !== null ? years < 3 : false;
+    } catch (e) {
+      return false;
+    }
+  })();
+
+  const experienceTitle = isFresherTemplate
+    ? "Technical Experience"
+    : "Professional Experience";
 
   const containerStyle = {
     border: "none",
@@ -1484,7 +1507,7 @@ export default function ResumeView({
                     marginBottom: 12,
                   }}
                 >
-                  Professional Experience
+                  {experienceTitle}
                 </h3>
                 {data.experience.map((exp, i) => (
                   <div key={i} style={{ marginBottom: 18 }}>
@@ -2897,7 +2920,7 @@ export default function ResumeView({
                   textTransform: "uppercase",
                 }}
               >
-                Professional Experience
+                {experienceTitle}
               </h3>
               {data.experience.map((exp, i) => (
                 <div
@@ -3733,7 +3756,7 @@ export default function ResumeView({
                     exp.role?.trim() || exp.years?.trim() || exp.bullets?.trim()
                 )) && (
                 <div style={sectionContainerStyle}>
-                  <h3 style={sectionTitleStyle}>Professional Experience</h3>
+                  <h3 style={sectionTitleStyle}>{experienceTitle}</h3>
                   {data.experience.map((exp, i) => (
                     <div
                       key={i}
@@ -4187,7 +4210,7 @@ export default function ResumeView({
           (exp) => exp.role?.trim() || exp.years?.trim() || exp.bullets?.trim()
         )) && (
         <div style={sectionContainerStyle}>
-          <h3 style={sectionTitleStyle}>Professional Experience</h3>
+          <h3 style={sectionTitleStyle}>{experienceTitle}</h3>
           {data.experience.map((exp, i) => (
             <div
               key={i}
