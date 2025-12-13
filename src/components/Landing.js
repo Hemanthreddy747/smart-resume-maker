@@ -31,7 +31,11 @@ const Landing = () => {
       {/* Navbar is now global via App layout */}
 
       {
-        <section className="hero-section" aria-labelledby="hero-title">
+        <section
+          className="hero-section hero-theme"
+          aria-labelledby="hero-title"
+        >
+          <div className="hero-bg" aria-hidden="true" />
           <div className="container hero-inner">
             <div className="hero-left">
               <div className="eyebrow">Build confidently</div>
