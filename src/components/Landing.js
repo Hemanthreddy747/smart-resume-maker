@@ -9,6 +9,7 @@ import "./TemplateStyles.css";
 import Features from "./Features";
 import HowItWorks from "./HowItWorks";
 import DeveloperCredit from "./DeveloperCredit";
+import TemplatesPreview from "./TemplatesPreview";
 
 const Landing = () => {
   const navigate = useNavigate();
@@ -81,6 +82,8 @@ const Landing = () => {
           </div>
         </section>
       }
+
+      <TemplatesPreview />
 
       <main>
         {/* Templates section removed */}
