@@ -112,12 +112,13 @@ const ListTemplates = ({ onOpenSaved, onSelectTemplate, renderPreview }) => {
       <div
         style={{
           display: "grid",
-          gridTemplateColumns: "repeat(auto-fit, minmax(320px, 1fr))",
+          gridTemplateColumns: "repeat(auto-fit, minmax(400px, 400px))",
           gap: "clamp(12px, 2vw, 24px)",
           margin: "20px 0",
           maxWidth: 1800,
           marginLeft: "auto",
           marginRight: "auto",
+          justifyContent: "center"
         }}
       >
         {templatesToShow.length === 0 ? (
