@@ -6,7 +6,6 @@ import {
   Navigate,
 } from "react-router-dom";
 import { AuthProvider } from "./context/AuthContext";
-import Home from "./components/Home";
 import Landing from "./components/Landing";
 import EditTemplate from "./components/EditTemplate";
 import EditResume from "./components/EditResume";
@@ -35,14 +34,6 @@ function App() {
           <Navbar onSignIn={() => setShowLoginModal(true)} />
           <Routes>
             <Route path="/" element={<Landing />} />
-            <Route
-              path="/home"
-              element={
-                <PrivateRoute>
-                  <Home />
-                </PrivateRoute>
-              }
-            />
             <Route path="/edit-template" element={<EditTemplate />} />
             <Route path="/edit-resume" element={<EditTemplate />} />
             <Route path="/list-templates" element={<Templates />} />

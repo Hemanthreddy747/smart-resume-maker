@@ -78,6 +78,7 @@ const Navbar = ({ onSignIn }) => {
         <div className="nav-actions">
           {currentUser ? (
             <>
+              <span className="user-email">{currentUser.email}</span>
               <button
                 className="btn btn-ghost"
                 onClick={() => navigate("/settings")}
@@ -181,7 +182,6 @@ const Navbar = ({ onSignIn }) => {
       {menuOpen && (
         <div className="mobile-drawer" role="dialog" aria-modal="true">
           <ul>
-            
             <li>
               <Link
                 className="nav-link"
@@ -209,6 +209,11 @@ const Navbar = ({ onSignIn }) => {
                 My Resume
               </Link>
             </li>
+            {currentUser && (
+              <li className="mobile-user-info">
+                <span className="user-email-mobile">{currentUser.email}</span>
+              </li>
+            )}
             <li className="mobile-actions">
               {currentUser ? (
                 <button

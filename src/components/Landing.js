@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import LoginModal from "./LoginModal";
-import "./Home.css";
 import "./Landing.css";
 // Removed TemplatesSection and EditResume imports as they are no longer used
 import heroImg from "../assets/lisbon-resume-templates.jpg";

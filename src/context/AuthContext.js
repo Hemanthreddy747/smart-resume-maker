@@ -1,6 +1,7 @@
 import React, { createContext, useContext, useState, useEffect } from "react";
-import { onAuthStateChanged } from "firebase/auth";
+import { onAuthStateChanged, signOut, deleteUser } from "firebase/auth";
 import { auth } from "../firebase/firebase";
+import { clearAllResumes } from "../components/db";
 
 const AuthContext = createContext();
 
@@ -17,8 +18,27 @@ export const AuthProvider = ({ children }) => {
     return unsubscribe;
   }, []);
 
+  const logout = async () => {
+    try {
+      await signOut(auth);
+    } catch (error) {
+      console.error("Error signing out:", error);
+    }
+  };
+
+  const deleteAccount = async () => {
+    if (!currentUser) return;
+    try {
+      await clearAllResumes();
+      await deleteUser(currentUser);
+    } catch (error) {
+      console.error("Error deleting account:", error);
+      throw error;
+    }
+  };
+
   return (
-    <AuthContext.Provider value={{ currentUser }}>
+    <AuthContext.Provider value={{ currentUser, logout, deleteAccount }}>
       {!loading && children}
     </AuthContext.Provider>
   );

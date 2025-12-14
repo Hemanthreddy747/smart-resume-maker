@@ -6,6 +6,7 @@ import {
   sendPasswordResetEmail,
   createUserWithEmailAndPassword,
   sendEmailVerification,
+  signOut,
 } from "firebase/auth";
 import { auth } from "../firebase/firebase";
 import { useNavigate } from "react-router-dom";
@@ -50,9 +51,14 @@ const Login = ({ onLoginSuccess }) => {
 
     try {
       await signInWithEmailAndPassword(auth, email, password);
+      const user = auth.currentUser;
+      if (!user.emailVerified) {
+        await signOut(auth);
+        notifyError("Please verify your email before logging in.");
+        return;
+      }
       notifySuccess("Login successful!");
       if (onLoginSuccess) onLoginSuccess();
-      navigate("/home");
     } catch (error) {
       notifyError(error.message);
     } finally {
@@ -104,9 +110,14 @@ const Login = ({ onLoginSuccess }) => {
 
     try {
       await signInWithPopup(auth, provider);
+      const user = auth.currentUser;
+      if (!user.emailVerified) {
+        await signOut(auth);
+        notifyError("Please verify your email before logging in.");
+        return;
+      }
       notifySuccess("Google sign-in successful!");
       if (onLoginSuccess) onLoginSuccess();
-      navigate("/home");
     } catch (error) {
       notifyError(error.message);
     } finally {

@@ -31,3 +31,12 @@
 .settings-section p {
   color: var(--text-secondary, #666);
 }
+
+.danger-zone {
+  border: 1px solid #dc3545;
+  background: #fff5f5;
+}
+
+.danger-zone h2 {
+  color: #dc3545;
+}
