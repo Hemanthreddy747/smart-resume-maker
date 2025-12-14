@@ -63,10 +63,11 @@ const TemplatesPreview = () => {
               <div style={{ height: "500px", overflow: "hidden" }}>
                 <div
                   style={{
-                    transform: "scale(0.7)",
+                    transform: "scale(0.5)",
                     transformOrigin: "top left",
-                    width: "142.86%",
-                    height: "142.86%",
+                    width: "200%",
+                    // width: "142.86%",
+                    // height: "142.86%",
                   }}
                 >
                   <ResumeView

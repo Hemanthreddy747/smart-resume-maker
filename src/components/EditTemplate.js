@@ -395,7 +395,7 @@ const EditTemplate = () => {
                     }}
                     onClick={handleDownloadPDF}
                   >
-                    Download
+                    Download PDF
                   </button>
                   <button
                     style={{
