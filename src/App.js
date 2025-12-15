@@ -12,6 +12,7 @@ import EditResume from "./components/EditResume";
 import Templates from "./components/Templates";
 import Settings from "./components/Settings";
 import MyResume from "./components/MyResume";
+import Notes from "./components/Notes";
 import PrivateRoute from "./components/PrivateRoute";
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
@@ -43,6 +44,14 @@ function App() {
               element={
                 <PrivateRoute>
                   <Settings />
+                </PrivateRoute>
+              }
+            />
+            <Route
+              path="/notes"
+              element={
+                <PrivateRoute>
+                  <Notes />
                 </PrivateRoute>
               }
             />

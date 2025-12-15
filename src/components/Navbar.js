@@ -72,6 +72,11 @@ const Navbar = ({ onSignIn }) => {
                 My Resume{" "}
               </Link>
             </li>
+            <li>
+              <Link className="nav-link" to="/notes">
+                Notes
+              </Link>
+            </li>
           </ul>
         </nav>
 
@@ -207,6 +212,15 @@ const Navbar = ({ onSignIn }) => {
                 onClick={() => setMenuOpen(false)}
               >
                 My Resume
+              </Link>
+            </li>
+            <li>
+              <Link
+                className="nav-link"
+                to="/notes"
+                onClick={() => setMenuOpen(false)}
+              >
+                Notes
               </Link>
             </li>
             {currentUser && (
