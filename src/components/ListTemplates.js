@@ -118,7 +118,7 @@ const ListTemplates = ({ onOpenSaved, onSelectTemplate, renderPreview }) => {
           maxWidth: 1800,
           marginLeft: "auto",
           marginRight: "auto",
-          justifyContent: "center"
+          justifyContent: "center",
         }}
       >
         {templatesToShow.length === 0 ? (
