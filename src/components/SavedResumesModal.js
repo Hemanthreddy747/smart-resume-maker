@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from "react";
-import { getAllResumes, deleteResume } from "./db";
+import { collection, getDocs, deleteDoc, doc } from "firebase/firestore";
+import { db } from "../firebase/firebase";
+import { useAuth } from "../context/AuthContext";
 
 const overlayStyle = {
   position: "fixed",
@@ -57,14 +59,29 @@ export default function SavedResumesModal({ isOpen, onClose, onOpenResume }) {
   const [items, setItems] = useState([]);
   const [loading, setLoading] = useState(false);
   const [deleteConfirm, setDeleteConfirm] = useState(null);
+  const { currentUser } = useAuth();
 
   useEffect(() => {
-    if (!isOpen) return;
+    if (!isOpen || !currentUser) return;
     setLoading(true);
-    getAllResumes()
-      .then((res) => setItems(res))
-      .finally(() => setLoading(false));
-  }, [isOpen]);
+    const fetchResumes = async () => {
+      try {
+        const querySnapshot = await getDocs(
+          collection(db, "users", currentUser.uid, "resumes")
+        );
+        const resumes = querySnapshot.docs.map((doc) => ({
+          id: doc.id,
+          ...doc.data(),
+        }));
+        setItems(resumes);
+      } catch (error) {
+        console.error("Error fetching resumes:", error);
+      } finally {
+        setLoading(false);
+      }
+    };
+    fetchResumes();
+  }, [isOpen, currentUser]);
 
   if (!isOpen) return null;
 
@@ -97,8 +114,8 @@ export default function SavedResumesModal({ isOpen, onClose, onOpenResume }) {
                 <div>
                   <div style={{ fontWeight: 600 }}>{item.name}</div>
                   <div style={{ fontSize: 12, color: "var(--text-secondary)" }}>
-                    Template #{item.templateId} · Updated{" "}
-                    {new Date(item.updatedAt).toLocaleString()}
+                    Template #{item.templateId} · Created{" "}
+                    {new Date(item.createdAt).toLocaleString()}
                   </div>
                 </div>
                 <div style={{ display: "flex", gap: 8 }}>
@@ -196,10 +213,28 @@ export default function SavedResumesModal({ isOpen, onClose, onOpenResume }) {
                   color: "var(--text-inverse)",
                 }}
                 onClick={async () => {
-                  await deleteResume(deleteConfirm.id);
-                  const res = await getAllResumes();
-                  setItems(res);
-                  setDeleteConfirm(null);
+                  try {
+                    await deleteDoc(
+                      doc(
+                        db,
+                        "users",
+                        currentUser.uid,
+                        "resumes",
+                        deleteConfirm.id
+                      )
+                    );
+                    const querySnapshot = await getDocs(
+                      collection(db, "users", currentUser.uid, "resumes")
+                    );
+                    const resumes = querySnapshot.docs.map((doc) => ({
+                      id: doc.id,
+                      ...doc.data(),
+                    }));
+                    setItems(resumes);
+                    setDeleteConfirm(null);
+                  } catch (error) {
+                    console.error("Error deleting resume:", error);
+                  }
                 }}
               >
                 Delete

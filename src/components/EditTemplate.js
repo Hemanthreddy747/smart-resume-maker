@@ -4,14 +4,14 @@ import dummyTemplates from "./dummyTemplates";
 import "./TemplateStyles.css";
 import SavedResumesModal from "./SavedResumesModal";
 import ListTemplates from "./ListTemplates";
-import { saveResume } from "./db";
 import ResumeView from "./ResumeView";
 
 import EnhanceAIButton from "./EnhanceAIButton";
 import MatchWithJobButton from "./MatchWithJobButton";
 import { showSuccess, showError } from "./Toasts";
-
-// ResumeView moved to ./ResumeView
+import { doc, setDoc } from "firebase/firestore";
+import { db } from "../firebase/firebase";
+import { useAuth } from "../context/AuthContext";
 
 const EditTemplate = () => {
   const [selected, setSelected] = useState(null);
@@ -24,6 +24,8 @@ const EditTemplate = () => {
   const [pdfImageUrls, setPdfImageUrls] = useState([]);
   const [isGeneratingPdf, setIsGeneratingPdf] = useState(false);
   const navigate = useNavigate();
+  const { currentUser } = useAuth();
+  const [isSaving, setIsSaving] = useState(false);
 
   // Auto-select template when arriving via /edit-template?template=<id>
   useEffect(() => {
@@ -420,31 +422,53 @@ const EditTemplate = () => {
                       color: "var(--text-inverse)",
                       border: "none",
                       borderRadius: 6,
-                      cursor: "pointer",
+                      cursor: isSaving ? "not-allowed" : "pointer",
                       fontSize: "clamp(12px, 2.5vw, 13px)",
                       fontWeight: 600,
                       whiteSpace: "nowrap",
+                      opacity: isSaving ? 0.6 : 1,
                     }}
+                    disabled={isSaving}
                     onClick={async () => {
-                      if (!resume) return;
+                      if (!resume || !printRef.current) return;
+                      setIsSaving(true);
                       try {
+                        const html = printRef.current.outerHTML
+                          .replace(/\s+/g, " ")
+                          .trim();
+                        const id = `${Date.now()}-${Math.floor(
+                          Math.random() * 1000
+                        )}`;
                         const payload = {
+                          id,
                           name: createFileName(
                             resume?.name || "Untitled",
                             "Resume"
                           ),
                           templateId: selected,
                           content: resume,
+                          html,
+                          createdAt: Date.now(),
+                          userId: currentUser.uid,
                         };
-                        await saveResume(payload);
-                        showSuccess("Resume saved to browser.");
+                        const docRef = doc(
+                          db,
+                          "users",
+                          currentUser.uid,
+                          "resumes",
+                          id
+                        );
+                        await setDoc(docRef, payload);
+                        showSuccess("Resume saved to Firebase.");
                       } catch (e) {
                         console.error(e);
                         showError("Failed to save resume.");
+                      } finally {
+                        setIsSaving(false);
                       }
                     }}
                   >
-                    Save
+                    {isSaving ? "Saving..." : "Save"}
                   </button>
                   <button
                     style={{
