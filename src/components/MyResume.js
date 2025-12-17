@@ -190,17 +190,13 @@ const MyResume = () => {
     return escaped.replace(new RegExp("(\\S{" + max + "})", "g"), "$1<wbr/>");
   };
 
-  if (!currentUser) {
-    return <div>Please log in to view your resumes.</div>;
-  }
-
-  if (loading) {
-    return (
-      <div className="my-resume-container">
-        <div className="loading">Loading your resumes...</div>
-      </div>
-    );
-  }
+  // if (loading) {
+  //   return (
+  //     <div className="my-resume-container">
+  //       <div className="loading">Loading your resumes...</div>
+  //     </div>
+  //   );
+  // }
 
   return (
     <div className="my-resume-container">

@@ -13,6 +13,7 @@ import {
 import { useAuth } from "../context/AuthContext";
 import { MdDelete } from "react-icons/md";
 import "./Notes.css";
+import LoginModal from "./LoginModal";
 
 const Notes = () => {
   const { currentUser } = useAuth();
@@ -23,6 +24,7 @@ const Notes = () => {
   const [editingId, setEditingId] = useState(null);
   const [editHeading, setEditHeading] = useState("");
   const [editContent, setEditContent] = useState("");
+  const [showLogin, setShowLogin] = useState(false);
 
   useEffect(() => {
     if (!currentUser) return;
@@ -45,6 +47,10 @@ const Notes = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    if (!currentUser) {
+      setShowLogin(true);
+      return;
+    }
     if (!heading.trim() || !content.trim()) return;
 
     setLoading(true);
@@ -69,6 +75,10 @@ const Notes = () => {
   };
 
   const handleSaveEdit = async (id) => {
+    if (!currentUser) {
+      setShowLogin(true);
+      return;
+    }
     if (!editHeading.trim() || !editContent.trim()) return;
 
     try {
@@ -91,16 +101,16 @@ const Notes = () => {
   };
 
   const handleDelete = async (id) => {
+    if (!currentUser) {
+      setShowLogin(true);
+      return;
+    }
     try {
       await deleteDoc(doc(db, `users/${currentUser.uid}/notes`, id));
     } catch (error) {
       console.error("Error deleting note:", error);
     }
   };
-
-  if (!currentUser) {
-    return <div>Please log in to view notes.</div>;
-  }
 
   return (
     <div className="notes-container">
@@ -185,6 +195,11 @@ const Notes = () => {
           </tbody>
         </table>
       </div>
+      <LoginModal
+        show={showLogin}
+        onClose={() => setShowLogin(false)}
+        onLoginSuccess={() => setShowLogin(false)}
+      />
     </div>
   );
 };

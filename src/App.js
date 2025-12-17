@@ -53,14 +53,7 @@ function App() {
                 </PrivateRoute>
               }
             />
-            <Route
-              path="/notes"
-              element={
-                <PrivateRoute>
-                  <Notes />
-                </PrivateRoute>
-              }
-            />
+            <Route path="/notes" element={<Notes />} />
             <Route path="*" element={<Navigate to="/" />} />
           </Routes>
           <Footer />
