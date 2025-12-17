@@ -1,6 +1,13 @@
 const { initializeApp } = require("firebase/app");
-const { getFirestore, doc, setDoc, getDoc, collection, getDocs } = require("firebase/firestore");
-require('dotenv').config();
+const {
+  getFirestore,
+  doc,
+  setDoc,
+  getDoc,
+  collection,
+  getDocs,
+} = require("firebase/firestore");
+require("dotenv").config();
 
 const firebaseConfig = {
   apiKey: process.env.REACT_APP_API_KEY,
@@ -38,8 +45,10 @@ async function testFirestore() {
 
     // Test collection read
     const querySnapshot = await getDocs(collection(db, "test"));
-    console.log("✅ Collection read test passed, docs count:", querySnapshot.size);
-
+    console.log(
+      "✅ Collection read test passed, docs count:",
+      querySnapshot.size
+    );
   } catch (error) {
     console.error("❌ Firestore test failed:", error.message);
   }
