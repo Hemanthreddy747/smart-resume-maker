@@ -3,35 +3,32 @@ import { db } from "../firebase/firebase";
 import {
   collection,
   addDoc,
-  query,
-  where,
-  orderBy,
-  onSnapshot,
   deleteDoc,
   doc,
+  query,
+  orderBy,
+  onSnapshot,
+  updateDoc,
 } from "firebase/firestore";
 import { useAuth } from "../context/AuthContext";
-import {
-  useReactTable,
-  getCoreRowModel,
-  getPaginationRowModel,
-  flexRender,
-} from "@tanstack/react-table";
 import { MdDelete } from "react-icons/md";
 import "./Notes.css";
 
 const Notes = () => {
+  const { currentUser } = useAuth();
+  const [notes, setNotes] = useState([]);
   const [heading, setHeading] = useState("");
   const [content, setContent] = useState("");
-  const [notes, setNotes] = useState([]);
-  const { currentUser } = useAuth();
+  const [loading, setLoading] = useState(false);
+  const [editingId, setEditingId] = useState(null);
+  const [editHeading, setEditHeading] = useState("");
+  const [editContent, setEditContent] = useState("");
 
   useEffect(() => {
     if (!currentUser) return;
 
     const q = query(
-      collection(db, "notes"),
-      where("userId", "==", currentUser.uid),
+      collection(db, `users/${currentUser.uid}/notes`),
       orderBy("timestamp", "desc")
     );
 
@@ -43,16 +40,16 @@ const Notes = () => {
       setNotes(notesData);
     });
 
-    return () => unsubscribe();
+    return unsubscribe;
   }, [currentUser]);
 
-  const handleAddNote = async (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     if (!heading.trim() || !content.trim()) return;
 
+    setLoading(true);
     try {
-      await addDoc(collection(db, "notes"), {
-        userId: currentUser.uid,
+      await addDoc(collection(db, `users/${currentUser.uid}/notes`), {
         heading: heading.trim(),
         content: content.trim(),
         timestamp: new Date(),
@@ -62,71 +59,53 @@ const Notes = () => {
     } catch (error) {
       console.error("Error adding note:", error);
     }
+    setLoading(false);
+  };
+
+  const handleEdit = (note) => {
+    setEditingId(note.id);
+    setEditHeading(note.heading);
+    setEditContent(note.content);
+  };
+
+  const handleSaveEdit = async (id) => {
+    if (!editHeading.trim() || !editContent.trim()) return;
+
+    try {
+      await updateDoc(doc(db, `users/${currentUser.uid}/notes`, id), {
+        heading: editHeading.trim(),
+        content: editContent.trim(),
+      });
+      setEditingId(null);
+      setEditHeading("");
+      setEditContent("");
+    } catch (error) {
+      console.error("Error updating note:", error);
+    }
+  };
+
+  const handleCancelEdit = () => {
+    setEditingId(null);
+    setEditHeading("");
+    setEditContent("");
   };
 
   const handleDelete = async (id) => {
     try {
-      await deleteDoc(doc(db, "notes", id));
+      await deleteDoc(doc(db, `users/${currentUser.uid}/notes`, id));
     } catch (error) {
       console.error("Error deleting note:", error);
     }
   };
 
-  const columns = [
-    {
-      accessorKey: "heading",
-      header: "Heading",
-    },
-    {
-      accessorKey: "content",
-      header: "Content",
-    },
-    {
-      accessorKey: "timestamp",
-      header: "Date & Time",
-      cell: ({ getValue, row }) => (
-        <div
-          style={{
-            display: "flex",
-            justifyContent: "space-between",
-            alignItems: "center",
-          }}
-        >
-          <span>
-            {getValue().toDate().toLocaleString("en-GB", { hour12: false })}
-          </span>
-          <button
-            onClick={() => handleDelete(row.original.id)}
-            style={{
-              background: "none",
-              border: "none",
-              cursor: "pointer",
-              color: "red",
-            }}
-          >
-            <MdDelete size={24} />
-          </button>
-        </div>
-      ),
-    },
-  ];
-
-  const table = useReactTable({
-    data: notes,
-    columns,
-    getCoreRowModel: getCoreRowModel(),
-    getPaginationRowModel: getPaginationRowModel(),
-    initialState: {
-      pagination: {
-        pageSize: 10,
-      },
-    },
-  });
+  if (!currentUser) {
+    return <div>Please log in to view notes.</div>;
+  }
 
   return (
     <div className="notes-container">
       <h1>Notes</h1>
-      <form onSubmit={handleAddNote} className="notes-form">
+      <form onSubmit={handleSubmit} className="note-form">
         <input
           type="text"
           placeholder="Heading"
@@ -140,65 +119,71 @@ const Notes = () => {
           onChange={(e) => setContent(e.target.value)}
           required
         />
-        <button type="submit">Add Note</button>
+        <button type="submit" disabled={loading}>
+          {loading ? "Saving..." : "Add Note"}
+        </button>
       </form>
-      <div className="notes-table-container">
+      <div className="table-responsive">
         <table className="notes-table">
           <thead>
-            {table.getHeaderGroups().map((headerGroup) => (
-              <tr key={headerGroup.id}>
-                {headerGroup.headers.map((header) => (
-                  <th key={header.id}>
-                    {header.isPlaceholder
-                      ? null
-                      : flexRender(
-                          header.column.columnDef.header,
-                          header.getContext()
-                        )}
-                  </th>
-                ))}
-              </tr>
-            ))}
+            <tr>
+              <th>Heading</th>
+              <th>Content</th>
+              <th>Date & Time</th>
+              <th>Actions</th>
+            </tr>
           </thead>
           <tbody>
-            {table.getRowModel().rows?.length ? (
-              table.getRowModel().rows.map((row) => (
-                <tr key={row.id}>
-                  {row.getVisibleCells().map((cell) => (
-                    <td key={cell.id}>
-                      {flexRender(
-                        cell.column.columnDef.cell,
-                        cell.getContext()
-                      )}
-                    </td>
-                  ))}
-                </tr>
-              ))
-            ) : (
-              <tr>
-                <td colSpan={columns.length}>No notes found.</td>
+            {notes.map((note) => (
+              <tr key={note.id}>
+                <td>
+                  {editingId === note.id ? (
+                    <input
+                      type="text"
+                      value={editHeading}
+                      onChange={(e) => setEditHeading(e.target.value)}
+                    />
+                  ) : (
+                    note.heading
+                  )}
+                </td>
+                <td>
+                  {editingId === note.id ? (
+                    <textarea
+                      value={editContent}
+                      onChange={(e) => setEditContent(e.target.value)}
+                    />
+                  ) : (
+                    note.content
+                  )}
+                </td>
+                <td>
+                  {new Date(note.timestamp.seconds * 1000).toLocaleString()}
+                </td>
+                <td>
+                  {editingId === note.id ? (
+                    <>
+                      <button onClick={() => handleSaveEdit(note.id)}>
+                        Save
+                      </button>
+                      <button onClick={handleCancelEdit}>Cancel</button>
+                    </>
+                  ) : (
+                    <>
+                      <button onClick={() => handleEdit(note)}>Edit</button>
+                      <button
+                        onClick={() => handleDelete(note.id)}
+                        title="Delete"
+                      >
+                        <MdDelete />
+                      </button>
+                    </>
+                  )}
+                </td>
               </tr>
-            )}
+            ))}
           </tbody>
         </table>
-        <div className="pagination">
-          <button
-            onClick={() => table.previousPage()}
-            disabled={!table.getCanPreviousPage()}
-          >
-            Previous
-          </button>
-          <span>
-            Page {table.getState().pagination.pageIndex + 1} of{" "}
-            {table.getPageCount()}
-          </span>
-          <button
-            onClick={() => table.nextPage()}
-            disabled={!table.getCanNextPage()}
-          >
-            Next
-          </button>
-        </div>
       </div>
     </div>
   );

@@ -1,11 +1,11 @@
 .my-resume-container {
-  max-width: 1200px;
+  max-width: 1600px;
   margin: 0 auto;
   padding: 40px 20px;
-  /* fill viewport height but leave room for footer; use CSS var fallback */
   min-height: calc(100vh - var(--footer-height, 80px));
   display: flex;
   flex-direction: column;
+  width: 100%;
 }
 
 .my-resume-header {
@@ -86,7 +86,7 @@
   box-shadow: 0 4px 12px rgba(11, 95, 255, 0.3);
 }
 
-.table-container {
+.resume-list {
   background: white;
   border-radius: 12px;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
@@ -94,47 +94,57 @@
   flex: 1 1 auto;
 }
 
-.resume-table {
-  width: 100%;
-  border-collapse: collapse;
-}
-
-.resume-table thead {
+.resume-header {
+  display: flex;
+  align-items: center;
+  padding: 16px;
+  border-bottom: 2px solid var(--border-color, #e0e0e0);
+  font-weight: 600;
+  color: var(--text-color, #1a1a1a);
   background: var(--bg-light, #f8f9fa);
 }
 
-.resume-table th {
+.resume-item {
+  display: flex;
+  align-items: center;
   padding: 16px;
-  text-align: left;
-  font-weight: 600;
-  color: var(--text-color, #1a1a1a);
-  font-size: 0.9rem;
-  text-transform: uppercase;
-  letter-spacing: 0.5px;
-  border-bottom: 2px solid var(--border-color, #e0e0e0);
-}
-
-.resume-table tbody tr {
   border-bottom: 1px solid var(--border-color, #e0e0e0);
   transition: background-color 0.2s ease;
 }
 
-.resume-table tbody tr:hover {
+.resume-item:hover {
   background: var(--bg-hover, #f8f9fa);
 }
 
-.resume-table td {
-  padding: 16px;
+.resume-item:last-child {
+  border-bottom: none;
+}
+
+.resume-name {
+  flex: 2;
+  font-weight: 500;
+  color: var(--text-color, #1a1a1a);
+  white-space: normal;
+  word-wrap: break-word;
+  max-width: 260px;
+  overflow-wrap: anywhere;
+  word-break: break-word;
+  hyphens: auto;
+}
+
+.resume-template {
+  flex: 1;
+  color: var(--text-color, #333);
+  font-size: 0.95rem;
+}
+
+.resume-modified {
+  flex: 1;
   color: var(--text-color, #333);
   font-size: 0.95rem;
 }
 
 /* Last Modified: allow two-line display (time above, date below) */
-.resume-table th:nth-child(3),
-.resume-table td:nth-child(3) {
-  white-space: normal;
-}
-
 .last-modified {
   display: inline-flex;
   flex-direction: column;
@@ -151,18 +161,13 @@
   color: var(--text-muted, #666);
 }
 
-.resume-name {
-  font-weight: 500;
-  color: var(--text-color, #1a1a1a);
-}
-
-.actions {
+.resume-actions {
+  flex: 1;
   display: flex;
   gap: 8px;
   flex-wrap: wrap;
-  align-items: flex-start;
+  align-items: center;
   justify-content: flex-start;
-  max-width: 100%;
 }
 
 .btn-action {
@@ -178,11 +183,7 @@
   transition: all 0.2s ease;
 }
 
-.actions .btn-action {
-  margin-bottom: 6px;
-}
-
-.actions .btn-action:last-child {
+.resume-actions .btn-action:last-child {
   margin-bottom: 0;
 }
 
@@ -197,6 +198,16 @@
 
 .btn-edit:hover {
   background: var(--primary-hover, #0a4ecc);
+}
+
+.btn-view {
+  border: 1px solid #ccc;
+  background: white;
+  color: #666;
+}
+
+.btn-view:hover {
+  background: #f0f0f0;
 }
 
 .btn-delete {
@@ -215,12 +226,8 @@
     gap: 20px;
   }
 
-  .table-container {
+  .resume-list {
     overflow-x: auto;
-  }
-
-  .resume-table {
-    min-width: 600px;
   }
 
   .my-resume-header h1 {
@@ -236,48 +243,30 @@
     width: 14px;
     height: 14px;
   }
-  .actions {
+
+  .resume-actions {
     justify-content: flex-start;
     gap: 6px;
-    flex-direction: column;
     align-items: flex-start;
   }
-}
 
-/* Responsive refinements: make table scrollable and compress controls on small screens */
-.table-container {
-  -webkit-overflow-scrolling: touch;
-}
+  .resume-item {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+  }
 
-.resume-table {
-  width: 100%;
-  table-layout: fixed;
-  min-width: 520px;
-}
+  .resume-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+  }
 
-.resume-table th,
-.resume-table td {
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-}
+  .resume-name {
+    max-width: none;
+  }
 
-.resume-name {
-  max-width: 260px;
-  white-space: normal;
-  overflow-wrap: anywhere;
-  word-break: break-word;
-  hyphens: auto;
-}
-
-.btn-text {
-  display: inline;
-}
-
-@media (max-width: 768px) {
-  /* hide the Template ID column on small screens to save space */
-  .resume-table th:nth-child(2),
-  .resume-table td:nth-child(2) {
+  .resume-template {
     display: none;
   }
 
@@ -286,12 +275,20 @@
     display: none;
   }
 
-  .resume-table {
-    min-width: 480px;
+  .resume-item {
+    padding: 8px;
+  }
+}
+
+@media (max-width: 480px) {
+  .resume-item {
+    padding: 10px;
   }
 
-  .resume-table td,
-  .resume-table th {
-    padding: 12px;
+  .resume-item,
+  .resume-name,
+  .resume-template,
+  .resume-modified {
+    font-size: 0.8rem;
   }
 }

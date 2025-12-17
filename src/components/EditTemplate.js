@@ -459,7 +459,7 @@ const EditTemplate = () => {
                           id
                         );
                         await setDoc(docRef, payload);
-                        showSuccess("Resume saved to Firebase.");
+                        showSuccess("Resume saved.");
                       } catch (e) {
                         console.error(e);
                         showError("Failed to save resume.");
