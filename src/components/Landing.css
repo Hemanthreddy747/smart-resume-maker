@@ -582,7 +582,7 @@
     rgba(255, 255, 255, 0.02)
   );
   border-radius: var(--radius-2xl);
-  padding: calc(var(--spacing-lg) + 4px);
+  /* padding: calc(var(--spacing-lg) + 4px); */
 }
 
 .preview-badge {

@@ -3,7 +3,11 @@ import { useNavigate } from "react-router-dom";
 import LoginModal from "./LoginModal";
 import "./Landing.css";
 // Removed TemplatesSection and EditResume imports as they are no longer used
-import heroImg from "../assets/lisbon-resume-templates.jpg";
+import img1 from "../assets/herosectionimages/lisbon-resume-templates.jpg";
+import img2 from "../assets/herosectionimages/Alexandra_Martinez_20251217_235742_Resume_page-0001.jpg";
+import img3 from "../assets/herosectionimages/Emily_Rodger_20251217_235720_Resume_page-0001.jpg";
+import img4 from "../assets/herosectionimages/lisbon-resume-templates.jpg";
+import img5 from "../assets/herosectionimages/Olivia_Bennett_20251217_235733_Resume_page-0001.jpg";
 import "./TemplateStyles.css";
 import Features from "./Features";
 import HowItWorks from "./HowItWorks";
@@ -15,6 +19,9 @@ const Landing = () => {
   const [showLogin, setShowLogin] = useState(false);
   const goToTemplates = () => navigate("/edit-template");
 
+  const images = [img1, img2, img3, img4, img5];
+  const [currentImageIndex, setCurrentImageIndex] = useState(0);
+
   // Scroll to hash targets like #features or #howitworks on load
   useEffect(() => {
     if (window.location.hash) {
@@ -25,6 +32,14 @@ const Landing = () => {
       }
     }
   }, []);
+
+  // Image carousel effect
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentImageIndex((prevIndex) => (prevIndex + 1) % images.length);
+    }, 3000);
+    return () => clearInterval(interval);
+  }, [images.length]);
 
   return (
     <div className="landing-root">
@@ -69,7 +84,10 @@ const Landing = () => {
             <div className="hero-right">
               <div className="hero-preview">
                 <div className="preview-frame">
-                  <img src={heroImg} alt="Resume templates preview" />
+                  <img
+                    src={images[currentImageIndex]}
+                    alt="Resume templates preview"
+                  />
                 </div>
                 <div className="preview-badge">Templates • Free</div>
               </div>
@@ -116,8 +134,6 @@ const Landing = () => {
             </div>
           </div>
         </section>
-
-      
 
         <section className="faq-section" id="faq">
           <div className="container">
