@@ -2,7 +2,7 @@
 .lp-developer-credit {
   position: fixed;
   right: 16px;
-  bottom: 16px;
+  bottom: 6%;
   z-index: 9999;
   pointer-events: auto;
 }

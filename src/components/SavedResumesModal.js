@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { collection, getDocs, deleteDoc, doc } from "firebase/firestore";
 import { db } from "../firebase/firebase";
 import { useAuth } from "../context/AuthContext";
+import { getAllResumes, deleteResume } from "./db";
 
 const overlayStyle = {
   position: "fixed",
@@ -62,18 +63,23 @@ export default function SavedResumesModal({ isOpen, onClose, onOpenResume }) {
   const { currentUser } = useAuth();
 
   useEffect(() => {
-    if (!isOpen || !currentUser) return;
+    if (!isOpen) return;
     setLoading(true);
     const fetchResumes = async () => {
       try {
-        const querySnapshot = await getDocs(
-          collection(db, "users", currentUser.uid, "resumes")
-        );
-        const resumes = querySnapshot.docs.map((doc) => ({
-          id: doc.id,
-          ...doc.data(),
-        }));
-        setItems(resumes);
+        if (currentUser) {
+          const querySnapshot = await getDocs(
+            collection(db, "users", currentUser.uid, "resumes")
+          );
+          const resumes = querySnapshot.docs.map((doc) => ({
+            id: doc.id,
+            ...doc.data(),
+          }));
+          setItems(resumes);
+        } else {
+          const resumes = await getAllResumes();
+          setItems(resumes);
+        }
       } catch (error) {
         console.error("Error fetching resumes:", error);
       } finally {
@@ -214,23 +220,29 @@ export default function SavedResumesModal({ isOpen, onClose, onOpenResume }) {
                 }}
                 onClick={async () => {
                   try {
-                    await deleteDoc(
-                      doc(
-                        db,
-                        "users",
-                        currentUser.uid,
-                        "resumes",
-                        deleteConfirm.id
-                      )
-                    );
-                    const querySnapshot = await getDocs(
-                      collection(db, "users", currentUser.uid, "resumes")
-                    );
-                    const resumes = querySnapshot.docs.map((doc) => ({
-                      id: doc.id,
-                      ...doc.data(),
-                    }));
-                    setItems(resumes);
+                    if (currentUser) {
+                      await deleteDoc(
+                        doc(
+                          db,
+                          "users",
+                          currentUser.uid,
+                          "resumes",
+                          deleteConfirm.id
+                        )
+                      );
+                      const querySnapshot = await getDocs(
+                        collection(db, "users", currentUser.uid, "resumes")
+                      );
+                      const resumes = querySnapshot.docs.map((doc) => ({
+                        id: doc.id,
+                        ...doc.data(),
+                      }));
+                      setItems(resumes);
+                    } else {
+                      await deleteResume(deleteConfirm.id);
+                      const resumes = await getAllResumes();
+                      setItems(resumes);
+                    }
                     setDeleteConfirm(null);
                   } catch (error) {
                     console.error("Error deleting resume:", error);

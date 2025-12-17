@@ -91,6 +91,63 @@ const Landing = () => {
 
         <HowItWorks />
 
+        <section className="testimonials-section" id="testimonials">
+          <div className="container">
+            <h2>What Our Users Say</h2>
+            <div className="testimonials-grid">
+              <div className="testimonial">
+                <p>
+                  "This resume maker is amazing! It helped me create a
+                  professional resume in minutes."
+                </p>
+                <cite>- Sarah Johnson, Software Engineer</cite>
+              </div>
+              <div className="testimonial">
+                <p>
+                  "Easy to use and ATS-friendly. Got more interview calls after
+                  using it."
+                </p>
+                <cite>- Michael Chen, Marketing Manager</cite>
+              </div>
+              <div className="testimonial">
+                <p>"The templates are modern and the PDF export is perfect."</p>
+                <cite>- Emily Davis, Data Analyst</cite>
+              </div>
+            </div>
+          </div>
+        </section>
+
+      
+
+        <section className="faq-section" id="faq">
+          <div className="container">
+            <h2>Frequently Asked Questions</h2>
+            <details>
+              <summary>Is the resume maker free?</summary>
+              <p>
+                Yes, basic features are free. Premium plans offer advanced
+                features.
+              </p>
+            </details>
+            <details>
+              <summary>Are the resumes ATS-friendly?</summary>
+              <p>
+                Yes, all templates are optimized for Applicant Tracking Systems.
+              </p>
+            </details>
+            <details>
+              <summary>Can I export my resume as PDF?</summary>
+              <p>
+                Absolutely, you can export your resume as a print-ready PDF.
+              </p>
+            </details>
+            <details>
+              <summary>How do I get started?</summary>
+              <p>Click "Start for free" and choose a template to begin.</p>
+            </details>
+          </div>
+        </section>
+
         {/* Developer & Maintainer Credit */}
         <DeveloperCredit />
       </main>

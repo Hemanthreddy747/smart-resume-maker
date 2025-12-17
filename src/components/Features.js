@@ -54,7 +54,7 @@ export default function Features() {
       aria-labelledby="features-title"
     >
       <div className="container features-inner">
-        <h2 id="features-title" className="section-title">
+        <h2 id="features-title" className="section-title mb-3">
           Key Features
         </h2>
 

@@ -12,6 +12,7 @@ import { showSuccess, showError } from "./Toasts";
 import { doc, setDoc } from "firebase/firestore";
 import { db } from "../firebase/firebase";
 import { useAuth } from "../context/AuthContext";
+import LoginModal from "./LoginModal";
 
 const EditTemplate = () => {
   const [selected, setSelected] = useState(null);
@@ -26,6 +27,7 @@ const EditTemplate = () => {
   const navigate = useNavigate();
   const { currentUser } = useAuth();
   const [isSaving, setIsSaving] = useState(false);
+  const [isLoginModalOpen, setLoginModalOpen] = useState(false);
 
   // Auto-select template when arriving via /edit-template?template=<id>
   useEffect(() => {
@@ -386,38 +388,6 @@ const EditTemplate = () => {
                   <button
                     style={{
                       padding: "8px 16px",
-                      background: "var(--success)",
-                      color: "var(--text-inverse)",
-                      border: "none",
-                      borderRadius: 6,
-                      cursor: "pointer",
-                      fontSize: "clamp(12px, 2.5vw, 13px)",
-                      fontWeight: 600,
-                      whiteSpace: "nowrap",
-                    }}
-                    onClick={handleDownloadPDF}
-                  >
-                    Download PDF
-                  </button>
-                  <button
-                    style={{
-                      padding: "8px 16px",
-                      background: "var(--warning)",
-                      color: "var(--text-inverse)",
-                      border: "none",
-                      borderRadius: 6,
-                      cursor: "pointer",
-                      fontSize: "clamp(12px, 2.5vw, 13px)",
-                      fontWeight: 600,
-                      whiteSpace: "nowrap",
-                    }}
-                    onClick={handlePrintPDF}
-                  >
-                    Print
-                  </button>
-                  <button
-                    style={{
-                      padding: "8px 16px",
                       background: "var(--primary-500)",
                       color: "var(--text-inverse)",
                       border: "none",
@@ -430,6 +400,10 @@ const EditTemplate = () => {
                     }}
                     disabled={isSaving}
                     onClick={async () => {
+                      if (!currentUser) {
+                        setLoginModalOpen(true);
+                        return;
+                      }
                       if (!resume || !printRef.current) return;
                       setIsSaving(true);
                       try {
@@ -485,6 +459,38 @@ const EditTemplate = () => {
                     onClick={() => setSavedModalOpen(true)}
                   >
                     Open Saved
+                  </button>
+                  <button
+                    style={{
+                      padding: "8px 16px",
+                      background: "var(--success)",
+                      color: "var(--text-inverse)",
+                      border: "none",
+                      borderRadius: 6,
+                      cursor: "pointer",
+                      fontSize: "clamp(12px, 2.5vw, 13px)",
+                      fontWeight: 600,
+                      whiteSpace: "nowrap",
+                    }}
+                    onClick={handleDownloadPDF}
+                  >
+                    Download PDF
+                  </button>
+                  <button
+                    style={{
+                      padding: "8px 16px",
+                      background: "var(--warning)",
+                      color: "var(--text-inverse)",
+                      border: "none",
+                      borderRadius: 6,
+                      cursor: "pointer",
+                      fontSize: "clamp(12px, 2.5vw, 13px)",
+                      fontWeight: 600,
+                      whiteSpace: "nowrap",
+                    }}
+                    onClick={handlePrintPDF}
+                  >
+                    Print
                   </button>
                 </div>
               </div>
@@ -604,6 +610,11 @@ const EditTemplate = () => {
           setSelected(item.templateId);
           setSavedModalOpen(false);
         }}
+      />
+      <LoginModal
+        show={isLoginModalOpen}
+        onClose={() => setLoginModalOpen(false)}
+        onLoginSuccess={() => setLoginModalOpen(false)}
       />
     </>
   );

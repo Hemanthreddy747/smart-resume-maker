@@ -35,6 +35,7 @@ export async function saveResume(resume) {
       name: resume.name || "Untitled",
       templateId: resume.templateId,
       content: resume.content,
+      html: resume.html || "",
       updatedAt: now,
     };
     const req = store.put(record);

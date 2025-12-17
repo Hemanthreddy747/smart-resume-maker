@@ -7,9 +7,9 @@ const Footer = () => {
       <div className="footer-inner">
         <span>© {new Date().getFullYear()} Resume-Maker</span>
         <div className="footer-links">
-          <a href="/privacy">Privacy</a>
-          <a href="/terms">Terms</a>
-          <a href="/contact">Contact</a>
+          <a href="/privacy">Privacy Policy</a>
+          <a href="/terms">Terms and Conditions</a>
+          <a href="/contact">Contact Us</a>
         </div>
       </div>
     </footer>

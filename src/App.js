@@ -17,6 +17,9 @@ import PrivateRoute from "./components/PrivateRoute";
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
 import LoginModal from "./components/LoginModal";
+import Privacy from "./components/Privacy";
+import Terms from "./components/Terms";
+import Contact from "./components/Contact";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import "./App.css";
@@ -39,6 +42,9 @@ function App() {
             <Route path="/edit-resume" element={<EditTemplate />} />
             <Route path="/list-templates" element={<Templates />} />
             <Route path="/my-resume" element={<MyResume />} />
+            <Route path="/privacy" element={<Privacy />} />
+            <Route path="/terms" element={<Terms />} />
+            <Route path="/contact" element={<Contact />} />
             <Route
               path="/settings"
               element={
