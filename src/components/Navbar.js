@@ -40,7 +40,7 @@ const Navbar = ({ onSignIn }) => {
   return (
     <header className="lm-navbar" role="banner">
       <div className="container navbar-inner">
-        <Link className="brand" to="/" aria-label="Resume-Maker home">
+        <Link className="brand" to="/" aria-label="AllinoneResume home">
           <svg
             width="30"
             height="30"
@@ -52,7 +52,7 @@ const Navbar = ({ onSignIn }) => {
             <rect width="24" height="24" rx="6" fill="#0b5fff" />
             <path d="M7 15V9l5-2v10l-5-2z" fill="white" opacity="0.95" />
           </svg>
-          <span className="brand-text">Resume-Maker</span>
+          <span className="brand-text">AllinoneResume</span>
         </Link>
 
         <nav className="nav-desktop" role="navigation" aria-label="Main">

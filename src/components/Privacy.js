@@ -10,7 +10,7 @@ const Privacy = () => {
 
       <h2>1. Introduction</h2>
       <p>
-        Welcome to Smart Resume Maker. We are committed to protecting your
+        Welcome to Smart AllinoneResume. We are committed to protecting your
         privacy. This Privacy Policy explains how we collect, use, disclose, and
         safeguard your information when you use our website and services.
       </p>
@@ -39,7 +39,7 @@ const Privacy = () => {
       <h2>5. Contact Us</h2>
       <p>
         If you have any questions about this Privacy Policy, please contact us
-        at privacy@smartresumemaker.com.
+        at privacy@smartAllinoneResume.com.
       </p>
     </div>
   );

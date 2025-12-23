@@ -238,7 +238,11 @@ const Login = ({ onLoginSuccess }) => {
                 required
               />
             </div>
-            <button type="submit" disabled={loading} className="auth-button border border-white mt-4">
+            <button
+              type="submit"
+              disabled={loading}
+              className="auth-button border border-white mt-4"
+            >
               {loading ? "Logging in..." : "Login"}
             </button>
 
@@ -304,7 +308,7 @@ const Login = ({ onLoginSuccess }) => {
     <div className="login-container">
       <div className="login-card">
         <div className="brand-section">
-          <h1>Resume-Maker</h1>
+          <h1>AllinoneResume</h1>
           <p>Welcome</p>
         </div>
         {renderForm()}

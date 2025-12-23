@@ -1,6 +1,6 @@
 // Simple IndexedDB helper for saving resumes
 
-const DB_NAME = "resume_maker_db";
+const DB_NAME = "AllinoneResume_db";
 const STORE_NAME = "resumes";
 const DB_VERSION = 1;
 

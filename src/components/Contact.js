@@ -11,7 +11,7 @@ const Contact = () => {
 
       <h2>Get in Touch</h2>
       <p>
-        <strong>Email:</strong> support@smartresumemaker.com
+        <strong>Email:</strong> support@smartAllinoneResume.com
       </p>
       <p>
         <strong>Phone:</strong> +1 (555) 123-4567
@@ -28,9 +28,9 @@ const Contact = () => {
       <h2>Follow Us</h2>
       <p>Stay updated with our latest features and tips:</p>
       <ul>
-        <li>Twitter: @SmartResumeMaker</li>
-        <li>LinkedIn: Smart Resume Maker</li>
-        <li>Facebook: SmartResumeMaker</li>
+        <li>Twitter: @SmartAllinoneResume</li>
+        <li>LinkedIn: Smart AllinoneResume</li>
+        <li>Facebook: SmartAllinoneResume</li>
       </ul>
     </div>
   );

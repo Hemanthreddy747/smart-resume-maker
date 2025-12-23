@@ -10,7 +10,7 @@ const Terms = () => {
 
       <h2>1. Acceptance of Terms</h2>
       <p>
-        By accessing and using Smart Resume Maker, you accept and agree to be
+        By accessing and using Smart AllinoneResume, you accept and agree to be
         bound by the terms and provision of this agreement.
       </p>
 
@@ -43,7 +43,7 @@ const Terms = () => {
       <h2>6. Contact Information</h2>
       <p>
         If you have any questions about these Terms, please contact us at
-        terms@smartresumemaker.com.
+        terms@smartAllinoneResume.com.
       </p>
     </div>
   );

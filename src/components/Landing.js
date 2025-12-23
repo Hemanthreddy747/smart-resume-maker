@@ -115,7 +115,7 @@ const Landing = () => {
             <div className="testimonials-grid">
               <div className="testimonial">
                 <p>
-                  "This resume maker is amazing! It helped me create a
+                  "This AllinoneResume is amazing! It helped me create a
                   professional resume in minutes."
                 </p>
                 <cite>- Sarah Johnson, Software Engineer</cite>
@@ -139,7 +139,7 @@ const Landing = () => {
           <div className="container">
             <h2>Frequently Asked Questions</h2>
             <details>
-              <summary>Is the resume maker free?</summary>
+              <summary>Is the AllinoneResume free?</summary>
               <p>
                 Yes, basic features are free. Premium plans offer advanced
                 features.

@@ -5,7 +5,7 @@ const Footer = () => {
   return (
     <footer className="site-footer">
       <div className="footer-inner">
-        <span>© {new Date().getFullYear()} Resume-Maker</span>
+        <span>© {new Date().getFullYear()} AllinoneResume</span>
         <div className="footer-links">
           <a href="/privacy">Privacy Policy</a>
           <a href="/terms">Terms and Conditions</a>
