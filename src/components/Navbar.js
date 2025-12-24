@@ -3,6 +3,7 @@ import { Link, useNavigate, useLocation } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
 import { signOut } from "firebase/auth";
 import { auth } from "../firebase/firebase";
+import logo from "../assets/images/logo.png";
 import "./Landing.css";
 
 const Navbar = ({ onSignIn }) => {
@@ -41,17 +42,13 @@ const Navbar = ({ onSignIn }) => {
     <header className="lm-navbar" role="banner">
       <div className="container navbar-inner">
         <Link className="brand" to="/" aria-label="AllinoneResume home">
-          <svg
+          <img
+            src={logo}
+            alt="AllinoneResume logo"
             width="30"
             height="30"
-            viewBox="0 0 24 24"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg"
             aria-hidden="true"
-          >
-            <rect width="24" height="24" rx="6" fill="#0b5fff" />
-            <path d="M7 15V9l5-2v10l-5-2z" fill="white" opacity="0.95" />
-          </svg>
+          />
           <span className="brand-text">AllinoneResume</span>
         </Link>
 
@@ -224,8 +221,14 @@ const Navbar = ({ onSignIn }) => {
               </Link>
             </li>
             {currentUser && (
-              <li className="mobile-user-info">
-                <span className="user-email-mobile">{currentUser.email}</span>
+              <li>
+                <Link
+                  className="nav-link"
+                  to="/settings"
+                  onClick={() => setMenuOpen(false)}
+                >
+                  Settings
+                </Link>
               </li>
             )}
             <li className="mobile-actions">
