@@ -744,7 +744,7 @@
 
 /* FAQ Section */
 .faq-section {
-  padding: 72px 16px;
+  /* padding: 72px 16px; */
   background: linear-gradient(180deg, #ffffff 0%, #f8fbff 100%);
 }
 
