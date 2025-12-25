@@ -3,25 +3,19 @@ import "./HowItWorks.css";
 
 const steps = [
   {
-    title: "Choose Template",
-    desc: "Pick a template that matches your style.",
-    icon: (
-      ""
-    ),
+    title: "Choose Your Resume Template",
+    desc: "Select from our collection of professional, ATS-friendly resume templates designed for various industries and job levels.",
+    icon: "",
   },
   {
-    title: "Fill Resume",
-    desc: "Enter your details and use AI suggestions to speed up writing.",
-    icon: (
-     ""
-    ),
+    title: "Fill Your Resume Details",
+    desc: "Enter your work experience, education, skills, and achievements. Use our AI-powered suggestions to write compelling content that stands out to hiring managers.",
+    icon: "",
   },
   {
-    title: "Download",
-    desc: "Export to PDF or share a link to download your resume.",
-    icon: (
-     ""
-    ),
+    title: "Download Your Professional Resume",
+    desc: "Export your ATS-optimized resume as a print-ready PDF or share a secure link. Ready to apply for your dream job!",
+    icon: "",
   },
 ];
 
@@ -35,11 +29,11 @@ export default function HowItWorks() {
       <div className="how-inner">
         <div className="how-header">
           <h2 id="how-title" className="section-title">
-            How It Works
+            How to Create Your Professional Resume in 3 Easy Steps
           </h2>
           <p className="section-lead">
-            Build a professional resume in minutes — smart, simple and
-            customizable.
+            Build an ATS-friendly, professional resume in minutes — smart,
+            simple, and completely customizable for any job application.
           </p>
         </div>
 
@@ -47,8 +41,10 @@ export default function HowItWorks() {
           {steps.map((s, i) => (
             <li className="how-step" key={i}>
               <div className="step-media">
-                <span className="step-num">{i + 1}</span>
-                <div className="step-icon" aria-hidden>
+                <span className="step-num" aria-label={`Step ${i + 1}`}>
+                  {i + 1}
+                </span>
+                <div className="step-icon" aria-hidden="true">
                   {s.icon}
                 </div>
               </div>

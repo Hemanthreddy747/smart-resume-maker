@@ -15,9 +15,11 @@ const TemplatesPreview = () => {
     <section
       className="templates-preview-section"
       style={{ padding: "60px 0", background: "#fff" }}
+      aria-labelledby="templates-heading"
     >
       <div className="container">
         <h2
+          id="templates-heading"
           style={{
             textAlign: "center",
             marginBottom: "40px",
@@ -25,8 +27,19 @@ const TemplatesPreview = () => {
             fontWeight: "bold",
           }}
         >
-          Choose from Professional Templates
+          Choose from Professional ATS-Friendly Resume Templates
         </h2>
+        <p
+          style={{
+            textAlign: "center",
+            marginBottom: "40px",
+            fontSize: "1.125rem",
+            color: "#4a5568",
+          }}
+        >
+          Select from our collection of expertly designed templates optimized
+          for Applicant Tracking Systems
+        </p>
         <div
           style={{
             display: "grid",
@@ -34,7 +47,7 @@ const TemplatesPreview = () => {
             gap: "30px",
           }}
         >
-          {templates.map((template) => (
+          {templates.map((template, index) => (
             <div
               key={template.id}
               className="template-card"
@@ -59,6 +72,9 @@ const TemplatesPreview = () => {
                 const button = e.currentTarget.querySelector(".choose-btn");
                 if (button) button.style.opacity = "0";
               }}
+              role="button"
+              tabIndex={0}
+              aria-label={`Choose ${template.name} resume template`}
             >
               <div style={{ height: "500px", overflow: "hidden" }}>
                 <div
@@ -66,9 +82,8 @@ const TemplatesPreview = () => {
                     transform: "scale(0.5)",
                     transformOrigin: "top left",
                     width: "200%",
-                    // width: "142.86%",
-                    // height: "142.86%",
                   }}
+                  aria-hidden="true"
                 >
                   <ResumeView
                     data={template.content}

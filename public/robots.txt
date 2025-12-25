@@ -1,0 +1,36 @@
+# Smart AllinoneResume - Robots.txt
+
+# Allow all crawlers
+User-agent: *
+Allow: /
+
+# Disallow private user areas
+Disallow: /settings
+Disallow: /my-resume
+
+# Crawl rate (optional - adjust as needed)
+Crawl-delay: 1
+
+# Sitemap location
+Sitemap: https://smartallinoneresume.com/sitemap.xml
+
+# Additional sitemaps (if you create separate ones)
+# Sitemap: https://smartallinoneresume.com/blog-sitemap.xml
+
+# Block bad bots (optional - adjust as needed)
+User-agent: AhrefsBot
+Crawl-delay: 10
+
+User-agent: SemrushBot
+Crawl-delay: 10
+
+# Allow Google and Bing specifically
+User-agent: Googlebot
+Allow: /
+
+User-agent: Bingbot
+Allow: /
+
+# Disallow access to specific file types if needed
+# Disallow: /*.json$
+# Disallow: /*.txt$

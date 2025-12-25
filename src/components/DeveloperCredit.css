@@ -1,9 +1,10 @@
 /* Simplified badge-style DeveloperCredit positioned bottom-right */
 .lp-developer-credit {
-  position: fixed;
-  right: 16px;
-  bottom: 6%;
-  z-index: 9999;
+  position: relative;
+  display: flex;
+  justify-content: flex-end;
+  padding: 20px 16px;
+  z-index: 100;
   pointer-events: auto;
 }
 
@@ -55,22 +56,26 @@
   margin-top: 2px;
 }
 
-/* On very small screens keep it centered at the bottom and unobtrusive */
 @media (max-width: 520px) {
   .lp-developer-credit {
-    left: 50%;
-    right: auto;
-    transform: translateX(-50%);
-    bottom: 12px;
-    display: none;
+    padding: 16px 0;
   }
 
   .lp-developer-link {
-    padding: 8px 12px;
+    padding: 6px 10px;
+    gap: 8px;
   }
 
   .lp-developer-avatar {
-    width: 36px;
-    height: 36px;
+    width: 32px;
+    height: 32px;
+  }
+
+  .lp-developer-name {
+    font-size: 12px;
+  }
+
+  .lp-developer-role {
+    font-size: 10px;
   }
 }

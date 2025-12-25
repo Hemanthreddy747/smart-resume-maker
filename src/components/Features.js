@@ -3,30 +3,36 @@ import "./Features.css";
 
 const FEATURES = [
   {
-    title: "AI Suggestions",
-    text: "AI-assisted content suggestions tailored to your role and experience.",
+    title: "AI-Powered Resume Suggestions",
+    text: "Get intelligent, AI-assisted content suggestions tailored to your specific role, industry, and experience level. Save hours of writing time.",
   },
   {
-    title: "Templates",
-    text: "Multiple professional templates with live responsive preview.",
+    title: "Professional ATS-Friendly Templates",
+    text: "Access multiple professional resume templates optimized for Applicant Tracking Systems. Live responsive preview ensures perfect formatting.",
   },
   {
-    title: "Live Editing",
-    text: "Real-time editing, autosave and easy inline formatting.",
+    title: "Real-Time Resume Editing",
+    text: "Edit your resume with instant preview, automatic saving, and easy inline formatting. See changes as you type with our intuitive editor.",
   },
   {
-    title: "Export & Share",
-    text: "Export to PDF, download or share a secure resume link.",
+    title: "Export & Share Your Resume",
+    text: "Download your professional resume as PDF, export to multiple formats, or share a secure resume link with potential employers.",
   },
   {
-    title: "Privacy",
-    text: "Secure authentication and private resume storage.",
+    title: "Privacy & Security First",
+    text: "Your resume data is protected with secure authentication, encrypted storage, and private resume management. Your information stays safe.",
   },
 ];
 
 function IconCircle() {
   return (
-    <svg width="40" height="40" viewBox="0 0 24 24" fill="none" aria-hidden>
+    <svg
+      width="40"
+      height="40"
+      viewBox="0 0 24 24"
+      fill="none"
+      aria-hidden="true"
+    >
       <defs>
         <linearGradient id="g1" x1="0" x2="1">
           <stop offset="0%" stopColor="#4f46e5" />
@@ -55,13 +61,17 @@ export default function Features() {
     >
       <div className="container features-inner">
         <h2 id="features-title" className="section-title mb-3">
-          Key Features
+          Key Features of Our Free Resume Builder
         </h2>
+        <p className="section-lead">
+          Everything you need to create a professional, ATS-optimized resume
+          that gets results
+        </p>
 
         <ul className="features-cards">
           {FEATURES.map((f, i) => (
             <li className="feature-card" key={f.title}>
-              <div className="feature-media" aria-hidden>
+              <div className="feature-media" aria-hidden="true">
                 <IconCircle />
               </div>
               <div className="feature-body">
