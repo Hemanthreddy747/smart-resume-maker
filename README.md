@@ -182,18 +182,8 @@ Recommended tools to track SEO performance:
 - [x] Content keyword optimization
 - [x] Blog for content marketing
 
-## 📝 License
-
-This project is licensed under the MIT License.
-
 ## 🤝 Contributing
 
 Contributions are welcome! Please feel free to submit a Pull Request.
 
-## 📧 Support
 
-For support, email support@smartallinoneresume.com or visit our [Contact Page](https://smartallinoneresume.com/contact).
-
----
-
-Built with ❤️ for job seekers worldwide
